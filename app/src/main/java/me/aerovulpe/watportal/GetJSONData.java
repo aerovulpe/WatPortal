@@ -68,7 +68,6 @@ enum Resource implements ResourceConstants {
 
 
     private StringBuilder endpointBuilder;
-    private String endpoint;
     private String methodName;
 
     private boolean isBuilt = false;
@@ -103,10 +102,9 @@ enum Resource implements ResourceConstants {
         if (methodName != null)
             endpointBuilder.append(methodName);
         endpointBuilder.append(".json");
-        endpoint = endpointBuilder.toString();
         isBuilt = true;
 
-        return endpoint;
+        return endpointBuilder.toString();
     }
 
 }
