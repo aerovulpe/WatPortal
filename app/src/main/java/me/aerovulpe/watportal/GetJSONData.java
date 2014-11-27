@@ -67,16 +67,17 @@ enum Resource implements ResourceConstants {
     BUILDINGS_COURSES(ResourceConstants.BUILDINGS_RESOURCE, "courses");
 
 
-
     private StringBuilder endpointBuilder;
     private String endpoint;
     private String methodName;
 
     private boolean isBuilt = false;
+    private int baseCount;
 
     Resource(String serviceName) {
         endpointBuilder = new StringBuilder();
         endpointBuilder.append(serviceName);
+        baseCount = endpointBuilder.length();
     }
 
     Resource(String serviceName, String methodName) {
@@ -85,19 +86,25 @@ enum Resource implements ResourceConstants {
     }
 
     public Resource addParams(String... params) {
+        if (isBuilt)
+            endpointBuilder.delete(baseCount, endpointBuilder.length());
+
         for (int i = 0; i < params.length; i++)
             endpointBuilder.append('/').append(params[i]);
+        isBuilt = false;
+
         return this;
     }
 
     public String buildEndpoint() {
-        if (!isBuilt) {
-            if (methodName != null)
-                endpointBuilder.append(methodName);
-            endpointBuilder.append(".json");
-            endpoint = endpointBuilder.toString();
-            isBuilt = true;
-        }
+        if (isBuilt)
+            endpointBuilder.delete(baseCount, endpointBuilder.length());
+
+        if (methodName != null)
+            endpointBuilder.append(methodName);
+        endpointBuilder.append(".json");
+        endpoint = endpointBuilder.toString();
+        isBuilt = true;
 
         return endpoint;
     }
@@ -135,7 +142,7 @@ public class GetJSONData extends GetRawData {
         Uri.Builder uriBuilder = Uri.parse(BASE_URI).buildUpon();
         uriBuilder.appendQueryParameter(API_KEY_PARAM, API_KEY);
 
-        uriBuilder.appendEncodedPath(Resource.EVENTS.buildEndpoint());
+        uriBuilder.appendEncodedPath(resource.addParams(params).buildEndpoint());
 
         return uriBuilder.build();
     }
