@@ -3,8 +3,8 @@ package me.aerovulpe.watportal.food.diets;
 
 import java.util.List;
 
-import me.aerovulpe.watportal.Meta;
-import me.aerovulpe.watportal.WatObject;
+import me.aerovulpe.watportal.rawdata.Meta;
+import me.aerovulpe.watportal.constants.WatObject;
 
 public class WatDiet implements WatObject{
    	private List<Data> data;

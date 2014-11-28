@@ -1,5 +1,5 @@
 
-package me.aerovulpe.watportal;
+package me.aerovulpe.watportal.rawdata;
 
 public class Meta{
    	private String message;

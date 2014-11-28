@@ -5,9 +5,9 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-import me.aerovulpe.watportal.Meta;
+import me.aerovulpe.watportal.rawdata.Meta;
 
-import static me.aerovulpe.watportal.Constants.DATE_FORMAT;
+import static me.aerovulpe.watportal.constants.Constants.DATE_FORMAT;
 
 public class WatNote{
    	private List<Data> data;

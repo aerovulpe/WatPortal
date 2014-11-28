@@ -2,7 +2,7 @@ package me.aerovulpe.watportal.food.locations;
 
 import java.text.ParseException;
 import java.util.Date;
-import static me.aerovulpe.watportal.Constants.*;
+import static me.aerovulpe.watportal.constants.Constants.*;
 
 /**
  * Created by Aaron on 27/11/2014.

@@ -3,7 +3,7 @@ package me.aerovulpe.watportal.food.watcard;
 
 import java.util.List;
 
-import me.aerovulpe.watportal.Meta;
+import me.aerovulpe.watportal.rawdata.Meta;
 
 public class WatCard{
    	private List<Data> data;

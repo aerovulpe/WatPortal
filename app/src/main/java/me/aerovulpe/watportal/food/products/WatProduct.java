@@ -1,7 +1,7 @@
 
 package me.aerovulpe.watportal.food.products;
 
-import me.aerovulpe.watportal.Meta;
+import me.aerovulpe.watportal.rawdata.Meta;
 
 public class WatProduct{
    	private Data data;

@@ -4,8 +4,8 @@ package me.aerovulpe.watportal.food.locations;
 import java.util.Date;
 import java.util.List;
 
-import me.aerovulpe.watportal.Meta;
-import me.aerovulpe.watportal.WatObject;
+import me.aerovulpe.watportal.rawdata.Meta;
+import me.aerovulpe.watportal.constants.WatObject;
 
 public class WatLocation implements WatObject{
    	private List<Data> data;

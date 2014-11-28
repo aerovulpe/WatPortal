@@ -1,4 +1,4 @@
-package me.aerovulpe.watportal;
+package me.aerovulpe.watportal.activities;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -14,6 +14,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import me.aerovulpe.watportal.R;
+import me.aerovulpe.watportal.constants.Resource;
+import me.aerovulpe.watportal.constants.WatObject;
+import me.aerovulpe.watportal.constants.WatObjectHandler;
+import me.aerovulpe.watportal.rawdata.GetJSONData;
 
 
 public class MainActivity extends Activity {

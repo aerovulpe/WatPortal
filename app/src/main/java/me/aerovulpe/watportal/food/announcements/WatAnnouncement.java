@@ -5,10 +5,10 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-import me.aerovulpe.watportal.Meta;
-import me.aerovulpe.watportal.WatObject;
+import me.aerovulpe.watportal.rawdata.Meta;
+import me.aerovulpe.watportal.constants.WatObject;
 
-import static me.aerovulpe.watportal.Constants.DATE_FORMAT;
+import static me.aerovulpe.watportal.constants.Constants.DATE_FORMAT;
 
 public class WatAnnouncement implements WatObject{
    	private List<Data> data;
