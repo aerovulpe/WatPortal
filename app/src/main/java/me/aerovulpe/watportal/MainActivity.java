@@ -3,6 +3,7 @@ package me.aerovulpe.watportal;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends Activity {
@@ -96,16 +96,16 @@ public class MainActivity extends Activity {
 
                     String[] args = params.toArray(new String[params.size()]);
                     //GetJSONData jsonData = new GetJSONData(Resource.COURSES, "", "10", "", "3", "4", "MATH");
-                    GetJSONData jsonData = new GetJSONData(Resource.FOOD_PRODUCTS, args);
+                    GetJSONData jsonData = new GetJSONData(Resource.FOOD_MENU, args);
                     jsonData.execute(PlaceholderFragment.this);
                 }
             });
         }
 
         @Override
-        public void setItems(List<? extends WatObject> items) {
-            List<Course> courses = (List<Course>) items;
-            ((TextView) getView().findViewById(R.id.textView2)).setText(courses.toString());
+        public void setWatObject(WatObject watObject) {
+            //testing
+            Log.d("TESTING", watObject.toString());
         }
     }
 }

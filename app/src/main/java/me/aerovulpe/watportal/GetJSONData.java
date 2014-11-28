@@ -7,64 +7,102 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import me.aerovulpe.watportal.food.menu.Date;
+import me.aerovulpe.watportal.food.menu.Dinner;
+import me.aerovulpe.watportal.food.menu.Lunch;
+import me.aerovulpe.watportal.food.menu.Meals;
+import me.aerovulpe.watportal.food.menu.Menu;
+import me.aerovulpe.watportal.food.menu.Outlet;
+import me.aerovulpe.watportal.food.menu.WatMenu;
+
+import static me.aerovulpe.watportal.Constants.API_KEY;
+import static me.aerovulpe.watportal.Constants.API_KEY_PARAM;
+import static me.aerovulpe.watportal.Constants.BASE_URI;
+import static me.aerovulpe.watportal.Constants.BUILDINGS_RESOURCE;
+import static me.aerovulpe.watportal.Constants.CODES_RESOURCE;
+import static me.aerovulpe.watportal.Constants.COURSES_RESOURCE;
+import static me.aerovulpe.watportal.Constants.DATA_KEY;
+import static me.aerovulpe.watportal.Constants.DATE_KEY;
+import static me.aerovulpe.watportal.Constants.DAY_KEY;
+import static me.aerovulpe.watportal.Constants.DIET_TYPE;
+import static me.aerovulpe.watportal.Constants.DINNER_KEY;
+import static me.aerovulpe.watportal.Constants.END_KEY;
+import static me.aerovulpe.watportal.Constants.EVENTS_RESOURCE;
+import static me.aerovulpe.watportal.Constants.FOOD_RESOURCE;
+import static me.aerovulpe.watportal.Constants.LUNCH_KEY;
+import static me.aerovulpe.watportal.Constants.MEALS_KEY;
+import static me.aerovulpe.watportal.Constants.MENU_KEY;
+import static me.aerovulpe.watportal.Constants.MESSAGE_KEY;
+import static me.aerovulpe.watportal.Constants.META_KEY;
+import static me.aerovulpe.watportal.Constants.METHOD_ID_KEY;
+import static me.aerovulpe.watportal.Constants.NEWS_RESOURCE;
+import static me.aerovulpe.watportal.Constants.NOTES_KEY;
+import static me.aerovulpe.watportal.Constants.OUTLETS_KEY;
+import static me.aerovulpe.watportal.Constants.OUTLET_ID_KEY;
+import static me.aerovulpe.watportal.Constants.OUTLET_NAME_KEY;
+import static me.aerovulpe.watportal.Constants.PRODUCT_ID_KEY;
+import static me.aerovulpe.watportal.Constants.PRODUCT_NAME_KEY;
+import static me.aerovulpe.watportal.Constants.REQUESTS_KEY;
+import static me.aerovulpe.watportal.Constants.RESOURCES_RESOURCE;
+import static me.aerovulpe.watportal.Constants.START_KEY;
+import static me.aerovulpe.watportal.Constants.STATUS_KEY;
+import static me.aerovulpe.watportal.Constants.TERMS_RESOURCE;
+import static me.aerovulpe.watportal.Constants.TIMESTAMP_KEY;
+import static me.aerovulpe.watportal.Constants.WEATHER_RESOURCE;
+import static me.aerovulpe.watportal.Constants.WEEK_KEY;
+import static me.aerovulpe.watportal.Constants.YEAR_KEY;
+
+
 /**
  * Created by Aaron on 17/11/2014.
  */
 
-interface ResourceConstants {
-    final String FOOD_RESOURCE = "foodservices";
-    final String COURSES_RESOURCE = "courses";
-    final String EVENTS_RESOURCE = "events";
-    final String NEWS_RESOURCE = "news";
-    final String WEATHER_RESOURCE = "weather";
-    final String TERMS_RESOURCE = "terms";
-    final String RESOURCES_RESOURCE = "resources";
-    final String CODES_RESOURCE = "codes";
-    final String BUILDINGS_RESOURCE = "buildings";
-}
 
-enum Resource implements ResourceConstants {
+enum Resource {
 
-    FOOD_MENU(ResourceConstants.FOOD_RESOURCE, "menu"),
-    FOOD_NOTES(ResourceConstants.FOOD_RESOURCE, "notes"),
-    FOOD_DIETS(ResourceConstants.FOOD_RESOURCE, "diets"),
-    FOOD_OUTLETS(ResourceConstants.FOOD_RESOURCE, "outlets"),
-    FOOD_LOCATIONS(ResourceConstants.FOOD_RESOURCE, "locations"),
-    FOOD_WATCARD(ResourceConstants.FOOD_RESOURCE, "watcard"),
-    FOOD_ANNOUNCEMENTS(ResourceConstants.FOOD_RESOURCE, "announcements"),
-    FOOD_PRODUCTS(ResourceConstants.FOOD_RESOURCE + "/products"),
+    FOOD_MENU(FOOD_RESOURCE, "menu"),
+    FOOD_NOTES(FOOD_RESOURCE, "notes"),
+    FOOD_DIETS(FOOD_RESOURCE, "diets"),
+    FOOD_OUTLETS(FOOD_RESOURCE, "outlets"),
+    FOOD_LOCATIONS(FOOD_RESOURCE, "locations"),
+    FOOD_WATCARD(FOOD_RESOURCE, "watcard"),
+    FOOD_ANNOUNCEMENTS(FOOD_RESOURCE, "announcements"),
+    FOOD_PRODUCTS(FOOD_RESOURCE + "/products"),
 
-    COURSES(ResourceConstants.COURSES_RESOURCE),
-    COURSES_SCHEDULE(ResourceConstants.COURSES_RESOURCE, "schedule"),
-    COURSES_PREREQUISITES(ResourceConstants.COURSES_RESOURCE, "prerequisites"),
-    COURSES_EXAMSCHEDULE(ResourceConstants.COURSES_RESOURCE, "examschedule"),
+    COURSES(COURSES_RESOURCE),
+    COURSES_SCHEDULE(COURSES_RESOURCE, "schedule"),
+    COURSES_PREREQUISITES(COURSES_RESOURCE, "prerequisites"),
+    COURSES_EXAMSCHEDULE(COURSES_RESOURCE, "examschedule"),
 
-    EVENTS(ResourceConstants.EVENTS_RESOURCE),
-    EVENTS_HOLIDAYS(ResourceConstants.EVENTS_RESOURCE, "holidays"),
+    EVENTS(EVENTS_RESOURCE),
+    EVENTS_HOLIDAYS(EVENTS_RESOURCE, "holidays"),
 
-    NEWS(ResourceConstants.NEWS_RESOURCE),
+    NEWS(NEWS_RESOURCE),
 
-    WEATHER_CURRENT(ResourceConstants.WEATHER_RESOURCE, "current"),
+    WEATHER_CURRENT(WEATHER_RESOURCE, "current"),
 
-    TERMS_LIST(ResourceConstants.TERMS_RESOURCE, "list"),
-    TERMS_SCHEDULE(ResourceConstants.TERMS_RESOURCE, "schedule"),
-    TERMS_EXAMSCHEDULE(ResourceConstants.TERMS_RESOURCE, "examschedule"),
-    TERMS_INFOSESSIONS(ResourceConstants.TERMS_RESOURCE, "infosessions"),
+    TERMS_LIST(TERMS_RESOURCE, "list"),
+    TERMS_SCHEDULE(TERMS_RESOURCE, "schedule"),
+    TERMS_EXAMSCHEDULE(TERMS_RESOURCE, "examschedule"),
+    TERMS_INFOSESSIONS(TERMS_RESOURCE, "infosessions"),
 
-    RESOURCES_TUTORS(ResourceConstants.RESOURCES_RESOURCE, "tutors"),
-    RESOURCES_PRINTERS(ResourceConstants.RESOURCES_RESOURCE, "printers"),
-    RESOURCES_INFOSESSIONS(ResourceConstants.RESOURCES_RESOURCE, "infosessions"),
-    RESOURCES_GOOSEWATCH(ResourceConstants.RESOURCES_RESOURCE, "goosewatch"),
+    RESOURCES_TUTORS(RESOURCES_RESOURCE, "tutors"),
+    RESOURCES_PRINTERS(RESOURCES_RESOURCE, "printers"),
+    RESOURCES_INFOSESSIONS(RESOURCES_RESOURCE, "infosessions"),
+    RESOURCES_GOOSEWATCH(RESOURCES_RESOURCE, "goosewatch"),
 
-    CODES_UNITS(ResourceConstants.CODES_RESOURCE, "units"),
-    CODES_TERMS(ResourceConstants.CODES_RESOURCE, "terms"),
-    CODES_GROUPS(ResourceConstants.CODES_RESOURCE, "groups"),
-    CODES_SUBJECTS(ResourceConstants.CODES_RESOURCE, "subjects"),
-    CODES_INSTRUCTIONS(ResourceConstants.CODES_RESOURCE, "instructions"),
+    CODES_UNITS(CODES_RESOURCE, "units"),
+    CODES_TERMS(CODES_RESOURCE, "terms"),
+    CODES_GROUPS(CODES_RESOURCE, "groups"),
+    CODES_SUBJECTS(CODES_RESOURCE, "subjects"),
+    CODES_INSTRUCTIONS(CODES_RESOURCE, "instructions"),
 
-    BUILDINGS(ResourceConstants.BUILDINGS_RESOURCE),
-    BUILDINGS_LIST(ResourceConstants.BUILDINGS_RESOURCE, "list"),
-    BUILDINGS_COURSES(ResourceConstants.BUILDINGS_RESOURCE, "courses");
+    BUILDINGS(BUILDINGS_RESOURCE),
+    BUILDINGS_LIST(BUILDINGS_RESOURCE, "list"),
+    BUILDINGS_COURSES(BUILDINGS_RESOURCE, "courses");
 
 
     private StringBuilder endpointBuilder;
@@ -111,7 +149,6 @@ enum Resource implements ResourceConstants {
 
 public class GetJSONData extends GetRawData {
     private static final String LOG_TAG = GetJSONData.class.getSimpleName();
-    private static final String API_KEY = "759f046d712dc42cc5a5b65745d635c3";
 
     private Resource resource;
     private WatObjectHandler watObjectHandler;
@@ -134,9 +171,6 @@ public class GetJSONData extends GetRawData {
     }
 
     private Uri buildCourseUri(Resource resource, String... params) {
-        final String BASE_URI = "https://api.uwaterloo.ca/v2/";
-        final String API_KEY_PARAM = "key";
-
         Uri.Builder uriBuilder = Uri.parse(BASE_URI).buildUpon();
         uriBuilder.appendQueryParameter(API_KEY_PARAM, API_KEY);
 
@@ -169,16 +203,102 @@ public class GetJSONData extends GetRawData {
                 return;
             }
 
-            final String DATA_KEY = "data";
 
             JSONObject rootObject = new JSONObject(getData());
-            JSONArray itemsArray = rootObject.getJSONArray(DATA_KEY);
+
+            JSONObject metaObject = rootObject.getJSONObject(META_KEY);
+            JSONObject dataObject = rootObject.getJSONObject(DATA_KEY);
+
+            Meta meta = new Meta();
+            meta.setRequests(metaObject.getInt(REQUESTS_KEY));
+            meta.setTimestamp(metaObject.getInt(TIMESTAMP_KEY));
+            meta.setStatus(metaObject.getInt(STATUS_KEY));
+            meta.setMessage(metaObject.getString(MESSAGE_KEY));
+            meta.setMethod_id(metaObject.getInt(METHOD_ID_KEY));
 
             switch (resource) {
+                case FOOD_MENU:
+                    WatMenu watMenu = new WatMenu();
 
+                    WatMenu.Data data = new WatMenu.Data();
+
+                    JSONObject dateObject = dataObject.getJSONObject(DATE_KEY);
+                    Date date = new Date();
+                    date.setWeek(dateObject.getInt(WEEK_KEY));
+                    date.setYear(dateObject.getInt(YEAR_KEY));
+                    date.setStart(dateObject.getString(START_KEY));
+                    date.setEnd(dateObject.getString(END_KEY));
+
+                    JSONArray outletArray = dataObject.getJSONArray(OUTLETS_KEY);
+                    List<Outlet> outlets = new ArrayList<Outlet>();
+                    for (int i = 0; i < outletArray.length(); i++) {
+                        JSONObject outletObject = outletArray.getJSONObject(i);
+                        Outlet outlet = new Outlet();
+
+                        JSONArray menuArray = outletObject.getJSONArray(MENU_KEY);
+                        List<Menu> menus = new ArrayList<Menu>();
+                        for (int j = 0; j < menuArray.length(); j++) {
+                            JSONObject menuObject = menuArray.getJSONObject(j);
+                            Menu menu = new Menu();
+
+                            JSONObject mealsObject = menuObject.getJSONObject(MEALS_KEY);
+                            Meals meals = new Meals();
+
+                            JSONArray lunchArray = mealsObject.getJSONArray(LUNCH_KEY);
+                            JSONArray dinnerArray = mealsObject.getJSONArray(DINNER_KEY);
+                            List<Lunch> lunches = new ArrayList<Lunch>();
+                            List<Dinner> dinners = new ArrayList<Dinner>();
+
+                            for (int k = 0; k < lunchArray.length(); k++) {
+                                JSONObject lunchObject = lunchArray.getJSONObject(k);
+                                Lunch lunch = new Lunch();
+                                lunch.setProduct_name(lunchObject.getString(PRODUCT_NAME_KEY));
+                               try{
+                                   lunch.setProduct_id(lunchObject.getInt(PRODUCT_ID_KEY));
+                               }catch (JSONException e){
+                                   Log.e(LOG_TAG, "PRODUCT ID IS NULL");
+                               }
+                                lunch.setDiet_type(lunchObject.getString(DIET_TYPE));
+                                lunches.add(lunch);
+                            }
+
+                            for (int l = 0; l < dinnerArray.length(); l++) {
+                                JSONObject dinnerObject = dinnerArray.getJSONObject(l);
+                                Dinner dinner = new Dinner();
+                                dinner.setProduct_name(dinnerObject.getString(PRODUCT_NAME_KEY));
+                                try{
+                                    dinner.setProduct_id(dinnerObject.getInt(PRODUCT_ID_KEY));
+                                }catch (JSONException e){
+                                    Log.e(LOG_TAG, "PRODUCT ID IS NULL");
+                                }
+                                dinner.setDiet_type(dinnerObject.getString(DIET_TYPE));
+                                dinners.add(dinner);
+                            }
+
+                            meals.setLunches(lunches);
+                            meals.setDinners(dinners);
+
+                            menu.setDate(menuObject.getString(DATE_KEY));
+                            menu.setDay(menuObject.getString(DAY_KEY));
+                            menu.setMeals(meals);
+                            menu.setNotes(menuObject.getString(NOTES_KEY));
+                            menus.add(menu);
+                        }
+
+                        outlet.setOutlet_name(outletObject.getString(OUTLET_NAME_KEY));
+                        outlet.setOutlet_id(outletObject.getInt(OUTLET_ID_KEY));
+                        outlet.setMenus(menus);
+                        outlets.add(outlet);
+                    }
+
+                    data.setDate(date);
+                    data.setOutlets(outlets);
+
+                    watMenu.setMeta(meta);
+                    watMenu.setData(data);
+                    watObjectHandler.setWatObject(watMenu);
+                    break;
             }
-
-
         }
     }
 }
