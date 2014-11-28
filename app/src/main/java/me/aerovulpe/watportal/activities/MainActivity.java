@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import me.aerovulpe.watportal.R;
-import me.aerovulpe.watportal.constants.Resource;
+import me.aerovulpe.watportal.resources.Resource;
 import me.aerovulpe.watportal.constants.WatObject;
 import me.aerovulpe.watportal.constants.WatObjectHandler;
 import me.aerovulpe.watportal.rawdata.GetJSONData;

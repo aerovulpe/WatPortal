@@ -6,10 +6,11 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import me.aerovulpe.watportal.constants.Resource;
+import me.aerovulpe.watportal.resources.Resource;
 import me.aerovulpe.watportal.constants.WatObject;
 import me.aerovulpe.watportal.constants.WatObjectHandler;
-import me.aerovulpe.watportal.food.menu.WatMenu;
+import me.aerovulpe.watportal.resources.food.menu.WatMenu;
+import me.aerovulpe.watportal.resources.Meta;
 
 import static me.aerovulpe.watportal.constants.Constants.API_KEY;
 import static me.aerovulpe.watportal.constants.Constants.API_KEY_PARAM;
