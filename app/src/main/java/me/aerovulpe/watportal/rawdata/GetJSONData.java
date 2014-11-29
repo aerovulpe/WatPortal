@@ -3,7 +3,6 @@ package me.aerovulpe.watportal.rawdata;
 import android.net.Uri;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,6 +10,7 @@ import me.aerovulpe.watportal.constants.WatObject;
 import me.aerovulpe.watportal.constants.WatObjectHandler;
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.resources.Resource;
+import me.aerovulpe.watportal.resources.food.diets.WatDiet;
 import me.aerovulpe.watportal.resources.food.menu.WatMenu;
 import me.aerovulpe.watportal.resources.food.notes.WatNote;
 
@@ -99,12 +99,13 @@ public class GetJSONData extends GetRawData {
 
             switch (resource) {
                 case FOOD_MENU:
-                    JSONObject dataObject = rootObject.getJSONObject(DATA_KEY);
-                    watObject = WatMenu.parse(meta, dataObject);
+                    watObject = WatMenu.parse(meta, rootObject.getJSONObject(DATA_KEY));
                     break;
                 case FOOD_NOTES:
-                    JSONArray dataArray = rootObject.getJSONArray(DATA_KEY);
-                    watObject = WatNote.parse(meta, dataArray);
+                    watObject = WatNote.parse(meta, rootObject.getJSONArray(DATA_KEY));
+                    break;
+                case FOOD_DIETS:
+                    watObject = WatDiet.parse(meta, rootObject.getJSONArray(DATA_KEY));
                     break;
             }
 

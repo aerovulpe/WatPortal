@@ -50,7 +50,8 @@ public final class Constants {
 
     public static final String PRODUCT_NAME_KEY = "product_name";
     public static final String PRODUCT_ID_KEY = "product_id";
-    public static final String DIET_TYPE = "diet_type";
+    public static final String DIET_ID_KEY = "diet_id";
+    public static final String DIET_TYPE_KEY = "diet_type";
     public static final String NOTES_KEY = "notes";
 
     public static final String NOTE_KEY = "note";

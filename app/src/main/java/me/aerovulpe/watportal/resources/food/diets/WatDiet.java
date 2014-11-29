@@ -1,10 +1,16 @@
 
 package me.aerovulpe.watportal.resources.food.diets;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.constants.WatObject;
+import static me.aerovulpe.watportal.constants.Constants.*;
 
 public class WatDiet implements WatObject{
    	private List<Data> data;
@@ -39,5 +45,39 @@ public class WatDiet implements WatObject{
         public void setDiet_type(String diet_type){
             this.diet_type = diet_type;
         }
+
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "diet_id=" + diet_id +
+                    ", diet_type='" + diet_type + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "WatDiet{" +
+                "data=" + data +
+                ", meta=" + meta +
+                '}';
+    }
+
+    public static WatDiet parse(Meta meta, JSONArray dataArray) throws JSONException{
+        WatDiet watDiet = new WatDiet();
+
+        List<WatDiet.Data> data = new ArrayList<WatDiet.Data>();
+        for (int i = 0; i < dataArray.length(); i++){
+            JSONObject dataObject = dataArray.getJSONObject(i);
+            WatDiet.Data dataItem = new Data();
+            dataItem.setDiet_id(dataObject.getInt(DIET_ID_KEY));
+            dataItem.setDiet_type(dataObject.getString(DIET_TYPE_KEY));
+            data.add(dataItem);
+        }
+
+        watDiet.setMeta(meta);
+        watDiet.setData(data);
+
+        return watDiet;
     }
 }

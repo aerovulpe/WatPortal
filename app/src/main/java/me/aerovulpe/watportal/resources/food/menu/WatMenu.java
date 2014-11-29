@@ -14,7 +14,7 @@ import me.aerovulpe.watportal.constants.WatObject;
 
 import static me.aerovulpe.watportal.constants.Constants.DATE_KEY;
 import static me.aerovulpe.watportal.constants.Constants.DAY_KEY;
-import static me.aerovulpe.watportal.constants.Constants.DIET_TYPE;
+import static me.aerovulpe.watportal.constants.Constants.DIET_TYPE_KEY;
 import static me.aerovulpe.watportal.constants.Constants.DINNER_KEY;
 import static me.aerovulpe.watportal.constants.Constants.END_KEY;
 import static me.aerovulpe.watportal.constants.Constants.LUNCH_KEY;
@@ -130,7 +130,7 @@ public class WatMenu implements WatObject {
                     } catch (JSONException e) {
                         Log.e(LOG_TAG, "PRODUCT ID IS NULL");
                     }
-                    lunch.setDiet_type(lunchObject.getString(DIET_TYPE));
+                    lunch.setDiet_type(lunchObject.getString(DIET_TYPE_KEY));
                     lunches.add(lunch);
                 }
 
@@ -143,7 +143,7 @@ public class WatMenu implements WatObject {
                     } catch (JSONException e) {
                         Log.e(LOG_TAG, "PRODUCT ID IS NULL");
                     }
-                    dinner.setDiet_type(dinnerObject.getString(DIET_TYPE));
+                    dinner.setDiet_type(dinnerObject.getString(DIET_TYPE_KEY));
                     dinners.add(dinner);
                 }
 
