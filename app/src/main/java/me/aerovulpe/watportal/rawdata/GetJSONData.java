@@ -3,14 +3,16 @@ package me.aerovulpe.watportal.rawdata;
 import android.net.Uri;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import me.aerovulpe.watportal.resources.Resource;
 import me.aerovulpe.watportal.constants.WatObject;
 import me.aerovulpe.watportal.constants.WatObjectHandler;
-import me.aerovulpe.watportal.resources.food.menu.WatMenu;
 import me.aerovulpe.watportal.resources.Meta;
+import me.aerovulpe.watportal.resources.Resource;
+import me.aerovulpe.watportal.resources.food.menu.WatMenu;
+import me.aerovulpe.watportal.resources.food.notes.WatNote;
 
 import static me.aerovulpe.watportal.constants.Constants.API_KEY;
 import static me.aerovulpe.watportal.constants.Constants.API_KEY_PARAM;
@@ -88,8 +90,6 @@ public class GetJSONData extends GetRawData {
             JSONObject rootObject = new JSONObject(getData());
 
             JSONObject metaObject = rootObject.getJSONObject(META_KEY);
-            JSONObject dataObject = rootObject.getJSONObject(DATA_KEY);
-
             Meta meta = new Meta();
             meta.setRequests(metaObject.getInt(REQUESTS_KEY));
             meta.setTimestamp(metaObject.getInt(TIMESTAMP_KEY));
@@ -99,7 +99,12 @@ public class GetJSONData extends GetRawData {
 
             switch (resource) {
                 case FOOD_MENU:
+                    JSONObject dataObject = rootObject.getJSONObject(DATA_KEY);
                     watObject = WatMenu.parse(meta, dataObject);
+                    break;
+                case FOOD_NOTES:
+                    JSONArray dataArray = rootObject.getJSONArray(DATA_KEY);
+                    watObject = WatNote.parse(meta, dataArray);
                     break;
             }
 

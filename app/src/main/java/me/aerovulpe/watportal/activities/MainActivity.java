@@ -102,7 +102,7 @@ public class MainActivity extends Activity {
 
                     String[] args = params.toArray(new String[params.size()]);
                     //GetJSONData jsonData = new GetJSONData(Resource.COURSES, "", "10", "", "3", "4", "MATH");
-                    GetJSONData jsonData = new GetJSONData(Resource.FOOD_MENU, args);
+                    GetJSONData jsonData = new GetJSONData(Resource.FOOD_NOTES, args);
                     jsonData.execute(PlaceholderFragment.this);
                 }
             });

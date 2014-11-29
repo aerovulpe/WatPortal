@@ -22,7 +22,7 @@ public final class Constants {
     public static final String CODES_RESOURCE = "codes";
     public static final String BUILDINGS_RESOURCE = "buildings";
 
-    public static final DateFormat DATE_FORMAT = new SimpleDateFormat();
+    public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     public static final String META_KEY = "meta";
     public static final String DATA_KEY = "data";
@@ -52,6 +52,8 @@ public final class Constants {
     public static final String PRODUCT_ID_KEY = "product_id";
     public static final String DIET_TYPE = "diet_type";
     public static final String NOTES_KEY = "notes";
+
+    public static final String NOTE_KEY = "note";
 
 
     private Constants() {
