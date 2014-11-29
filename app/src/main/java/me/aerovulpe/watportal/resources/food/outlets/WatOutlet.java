@@ -39,20 +39,20 @@ public class WatOutlet implements WatObject{
          public boolean getHas_breakfast(){
             return this.has_breakfast;
         }
-        public void setHas_breakfast(boolean has_breakfast){
-            this.has_breakfast = has_breakfast;
+        public void setHas_breakfast(int has_breakfast){
+            this.has_breakfast = (has_breakfast == 1) ? true : false;
         }
          public boolean getHas_dinner(){
             return this.has_dinner;
         }
-        public void setHas_dinner(boolean has_dinner){
-            this.has_dinner = has_dinner;
+        public void setHas_dinner(int has_dinner){
+            this.has_dinner = (has_dinner == 1) ? true : false;
         }
          public boolean getHas_lunch(){
             return this.has_lunch;
         }
-        public void setHas_lunch(boolean has_lunch){
-            this.has_lunch = has_lunch;
+        public void setHas_lunch(int has_lunch){
+            this.has_lunch = (has_lunch == 1) ? true : false;
         }
          public int getOutlet_id(){
             return this.outlet_id;
@@ -96,9 +96,9 @@ public class WatOutlet implements WatObject{
             Data dataItem = new Data();
             dataItem.setOutlet_id(dataObject.getInt(OUTLET_ID_KEY));
             dataItem.setOutlet_name(dataObject.getString(OUTLET_NAME_KEY));
-            dataItem.setHas_breakfast((dataObject.getInt(HAS_BREAKFAST_KEY) == 1) ? true : false);
-            dataItem.setHas_lunch((dataObject.getInt(HAS_LUNCH_KEY) == 1) ? true : false);
-            dataItem.setHas_dinner((dataObject.getInt(HAS_DINNER_KEY) == 1) ? true : false);
+            dataItem.setHas_breakfast(dataObject.getInt(HAS_BREAKFAST_KEY));
+            dataItem.setHas_lunch(dataObject.getInt(HAS_LUNCH_KEY));
+            dataItem.setHas_dinner(dataObject.getInt(HAS_DINNER_KEY));
             data.add(dataItem);
         }
 
