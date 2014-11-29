@@ -56,6 +56,10 @@ public final class Constants {
 
     public static final String NOTE_KEY = "note";
 
+    public static final String HAS_BREAKFAST_KEY = "has_breakfast";
+    public static final String HAS_LUNCH_KEY = "has_lunch";
+    public static final String HAS_DINNER_KEY = "has_dinner";
+
 
     private Constants() {
         // restrict instantiation

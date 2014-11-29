@@ -1,11 +1,18 @@
 
 package me.aerovulpe.watportal.resources.food.outlets;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
+import me.aerovulpe.watportal.constants.WatObject;
 import me.aerovulpe.watportal.resources.Meta;
+import static me.aerovulpe.watportal.constants.Constants.*;
 
-public class WatOutlet{
+public class WatOutlet implements WatObject{
    	private List<Data> data;
    	private Meta meta;
 
@@ -59,5 +66,45 @@ public class WatOutlet{
         public void setOutlet_name(String outlet_name){
             this.outlet_name = outlet_name;
         }
+
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "has_breakfast=" + has_breakfast +
+                    ", has_dinner=" + has_dinner +
+                    ", has_lunch=" + has_lunch +
+                    ", outlet_id=" + outlet_id +
+                    ", outlet_name='" + outlet_name + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "WatOutlet{" +
+                "data=" + data +
+                ", meta=" + meta +
+                '}';
+    }
+
+    public static WatOutlet parse(Meta meta, JSONArray dataArray) throws JSONException{
+        WatOutlet watOutlet = new WatOutlet();
+
+        List<Data> data = new ArrayList<Data>();
+        for (int i = 0; i < dataArray.length(); i++){
+            JSONObject dataObject = dataArray.getJSONObject(i);
+            Data dataItem = new Data();
+            dataItem.setOutlet_id(dataObject.getInt(OUTLET_ID_KEY));
+            dataItem.setOutlet_name(dataObject.getString(OUTLET_NAME_KEY));
+            dataItem.setHas_breakfast((dataObject.getInt(HAS_BREAKFAST_KEY) == 1) ? true : false);
+            dataItem.setHas_lunch((dataObject.getInt(HAS_LUNCH_KEY) == 1) ? true : false);
+            dataItem.setHas_dinner((dataObject.getInt(HAS_DINNER_KEY) == 1) ? true : false);
+            data.add(dataItem);
+        }
+
+        watOutlet.setMeta(meta);
+        watOutlet.setData(data);
+
+        return watOutlet;
     }
 }
