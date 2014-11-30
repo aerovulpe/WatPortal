@@ -11,6 +11,7 @@ import java.util.List;
 
 import me.aerovulpe.watportal.constants.WatObject;
 import me.aerovulpe.watportal.resources.Meta;
+import me.aerovulpe.watportal.resources.Resource;
 
 import static me.aerovulpe.watportal.constants.Constants.DATE_FORMAT;
 import static me.aerovulpe.watportal.constants.Constants.DATE_KEY;
@@ -36,6 +37,11 @@ public class WatNote implements WatObject{
 
     public void setMeta(Meta meta) {
         this.meta = meta;
+    }
+
+    @Override
+    public Resource getResourceType() {
+        return Resource.FOOD_NOTES;
     }
 
     public static class Data {

@@ -1,9 +1,11 @@
 
 package me.aerovulpe.watportal.resources.food.products;
 
+import me.aerovulpe.watportal.constants.WatObject;
 import me.aerovulpe.watportal.resources.Meta;
+import me.aerovulpe.watportal.resources.Resource;
 
-public class WatProduct{
+public class WatProduct implements WatObject{
    	private Data data;
    	private Meta meta;
 
@@ -19,6 +21,11 @@ public class WatProduct{
 	public void setMeta(Meta meta){
 		this.meta = meta;
 	}
+
+    @Override
+    public Resource getResourceType() {
+        return Resource.FOOD_PRODUCTS;
+    }
 
     public static class Data{
            private int calcium_percent;

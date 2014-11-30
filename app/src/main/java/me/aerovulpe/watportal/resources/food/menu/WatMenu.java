@@ -11,6 +11,7 @@ import java.util.List;
 
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.constants.WatObject;
+import me.aerovulpe.watportal.resources.Resource;
 
 import static me.aerovulpe.watportal.constants.Constants.DATE_KEY;
 import static me.aerovulpe.watportal.constants.Constants.DAY_KEY;
@@ -50,6 +51,11 @@ public class WatMenu implements WatObject {
 
     public void setMeta(Meta meta) {
         this.meta = meta;
+    }
+
+    @Override
+    public Resource getResourceType() {
+        return Resource.FOOD_MENU;
     }
 
     public static class Data {

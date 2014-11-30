@@ -38,4 +38,15 @@ public class Meta{
 	public void setTimestamp(int timestamp){
 		this.timestamp = timestamp;
 	}
+
+    @Override
+    public String toString() {
+        return "Meta{" +
+                "message='" + message + '\'' +
+                ", method_id=" + method_id +
+                ", requests=" + requests +
+                ", status=" + status +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }

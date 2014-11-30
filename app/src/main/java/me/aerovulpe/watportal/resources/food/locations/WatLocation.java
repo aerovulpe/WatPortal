@@ -6,6 +6,7 @@ import java.util.List;
 
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.constants.WatObject;
+import me.aerovulpe.watportal.resources.Resource;
 
 public class WatLocation implements WatObject{
    	private List<Data> data;
@@ -23,6 +24,11 @@ public class WatLocation implements WatObject{
 	public void setMeta(Meta meta){
 		this.meta = meta;
 	}
+
+    @Override
+    public Resource getResourceType() {
+        return Resource.FOOD_LOCATIONS;
+    }
 
     public static class Data{
            private Additional additional;

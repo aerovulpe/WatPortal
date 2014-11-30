@@ -3,9 +3,11 @@ package me.aerovulpe.watportal.resources.food.watcard;
 
 import java.util.List;
 
+import me.aerovulpe.watportal.constants.WatObject;
 import me.aerovulpe.watportal.resources.Meta;
+import me.aerovulpe.watportal.resources.Resource;
 
-public class WatCard{
+public class WatCard implements WatObject{
    	private List<Data> data;
    	private Meta meta;
 
@@ -21,6 +23,11 @@ public class WatCard{
 	public void setMeta(Meta meta){
 		this.meta = meta;
 	}
+
+    @Override
+    public Resource getResourceType() {
+        return Resource.FOOD_WATCARD;
+    }
 
     public static class Data{
            private String address;

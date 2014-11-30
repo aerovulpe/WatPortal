@@ -16,10 +16,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import me.aerovulpe.watportal.R;
-import me.aerovulpe.watportal.resources.Resource;
 import me.aerovulpe.watportal.constants.WatObject;
 import me.aerovulpe.watportal.constants.WatObjectHandler;
 import me.aerovulpe.watportal.rawdata.GetJSONData;
+import me.aerovulpe.watportal.resources.Resource;
 
 
 public class MainActivity extends Activity {
@@ -101,9 +101,10 @@ public class MainActivity extends Activity {
                     ((TextView) getView().findViewById(R.id.textView)).setText("Check LogCat for data returned.");
 
                     String[] args = params.toArray(new String[params.size()]);
-                    //GetJSONData jsonData = new GetJSONData(Resource.COURSES, "", "10", "", "3", "4", "MATH");
-                    GetJSONData jsonData = new GetJSONData(Resource.FOOD_OUTLETS, args);
-                    jsonData.execute(PlaceholderFragment.this);
+                    //new GetJSONData(Resource.FOOD_MENU, args).execute(PlaceholderFragment.this);
+                    //new GetJSONData(Resource.FOOD_NOTES, args).execute(PlaceholderFragment.this);
+                    //new GetJSONData(Resource.FOOD_DIETS, args).execute(PlaceholderFragment.this);
+                    new GetJSONData(Resource.FOOD_OUTLETS, args).execute(PlaceholderFragment.this);
                 }
             });
         }
@@ -111,7 +112,7 @@ public class MainActivity extends Activity {
         @Override
         public void setWatObject(WatObject watObject) {
             //testing
-            Log.d("TESTING", watObject.toString());
+            Log.d("TESTING", watObject.toString() + "\n" + watObject.getResourceType().name());
         }
     }
 }

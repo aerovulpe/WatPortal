@@ -10,6 +10,8 @@ import java.util.List;
 
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.constants.WatObject;
+import me.aerovulpe.watportal.resources.Resource;
+
 import static me.aerovulpe.watportal.constants.Constants.*;
 
 public class WatDiet implements WatObject{
@@ -28,6 +30,11 @@ public class WatDiet implements WatObject{
 	public void setMeta(Meta meta){
 		this.meta = meta;
 	}
+
+    @Override
+    public Resource getResourceType() {
+        return Resource.FOOD_DIETS;
+    }
 
     public static class Data{
            private int diet_id;
