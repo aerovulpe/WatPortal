@@ -60,6 +60,27 @@ public final class Constants {
     public static final String HAS_LUNCH_KEY = "has_lunch";
     public static final String HAS_DINNER_KEY = "has_dinner";
 
+    public static final String BUILDING_KEY = "building";
+    public static final String LOGO_KEY = "logo";
+    public static final String LATITUDE_KEY = "latitude";
+    public static final String LONGITUDE_KEY = "longitude";
+    public static final String DESCRIPTION_KEY = "description";
+    public static final String NOTICE_KEY = "notice";
+    public static final String IS_OPEN_NOW_KEY = "is_open_now";
+    public static final String IS_CLOSED_KEY = "is_closed";
+    public static final String OPENING_HOURS_KEY = "opening_hours";
+    public static final String OPENING_HOUR_KEY = "opening_hour";
+    public static final String CLOSING_HOUR_KEY = "closing_hour";
+    public static final String SPECIAL_HOURS_KEY = "special_hours";
+    public static final String DATES_CLOSED_KEY = "dates_closed";
+
+    public static final String SUNDAY_KEY = "sunday";
+    public static final String MONDAY_KEY = "monday";
+    public static final String TUESDAY_KEY = "tuesday";
+    public static final String WEDNESDAY_KEY = "wednesday";
+    public static final String THURSDAY_KEY = "thursday";
+    public static final String FRIDAY_KEY = "friday";
+    public static final String SATURDAY_KEY = "saturday";
 
     private Constants() {
         // restrict instantiation

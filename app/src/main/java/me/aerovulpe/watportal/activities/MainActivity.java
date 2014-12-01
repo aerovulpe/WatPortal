@@ -104,7 +104,8 @@ public class MainActivity extends Activity {
                     //new GetJSONData(Resource.FOOD_MENU, args).execute(PlaceholderFragment.this);
                     //new GetJSONData(Resource.FOOD_NOTES, args).execute(PlaceholderFragment.this);
                     //new GetJSONData(Resource.FOOD_DIETS, args).execute(PlaceholderFragment.this);
-                    new GetJSONData(Resource.FOOD_OUTLETS, args).execute(PlaceholderFragment.this);
+                    //new GetJSONData(Resource.FOOD_OUTLETS, args).execute(PlaceholderFragment.this);
+                    new GetJSONData(Resource.FOOD_LOCATIONS, args).execute(PlaceholderFragment.this);
                 }
             });
         }

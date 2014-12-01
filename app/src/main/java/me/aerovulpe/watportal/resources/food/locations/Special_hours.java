@@ -39,4 +39,13 @@ public class Special_hours {
     public void setClosing_hour(String closing_hour) {
         this.closing_hour = closing_hour;
     }
+
+    @Override
+    public String toString() {
+        return "Special_hours{" +
+                "date=" + date +
+                ", opening_hour='" + opening_hour + '\'' +
+                ", closing_hour='" + closing_hour + '\'' +
+                '}';
+    }
 }
