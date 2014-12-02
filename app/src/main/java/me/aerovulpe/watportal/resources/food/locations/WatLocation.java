@@ -180,7 +180,7 @@ public class WatLocation implements WatObject {
         @Override
         public String toString() {
             return "Data{" +
-                    ", building='" + building + '\'' +
+                    "building='" + building + '\'' +
                     ", dates_closed=" + dates_closed +
                     ", description='" + description + '\'' +
                     ", is_open_now=" + is_open_now +
@@ -236,32 +236,32 @@ public class WatLocation implements WatObject {
             JSONObject openingHoursObject = dataObject.getJSONObject(OPENING_HOURS_KEY);
 
             JSONObject sundayObject = openingHoursObject.getJSONObject(SUNDAY_KEY);
-            Day sunday = new Day();
-            sunday.setFields(DayName.SUNDAY, sundayObject);
+            Day sunday = new Day(DayName.SUNDAY);
+            sunday.setFields(sundayObject);
 
             JSONObject mondayObject = openingHoursObject.getJSONObject(MONDAY_KEY);
-            Day monday = new Day();
-            monday.setFields(DayName.MONDAY, mondayObject);
+            Day monday = new Day(DayName.MONDAY);
+            monday.setFields(mondayObject);
 
             JSONObject tuesdayObject = openingHoursObject.getJSONObject(TUESDAY_KEY);
-            Day tuesday = new Day();
-            tuesday.setFields(DayName.TUESDAY, tuesdayObject);
+            Day tuesday = new Day(DayName.TUESDAY);
+            tuesday.setFields(tuesdayObject);
 
             JSONObject wednesdayObject = openingHoursObject.getJSONObject(WEDNESDAY_KEY);
-            Day wednesday = new Day();
-            wednesday.setFields(DayName.WEDNESDAY, wednesdayObject);
+            Day wednesday = new Day(DayName.WEDNESDAY);
+            wednesday.setFields(wednesdayObject);
 
             JSONObject thursdayObject = openingHoursObject.getJSONObject(THURSDAY_KEY);
-            Day thursday = new Day();
-            thursday.setFields(DayName.THURSDAY, thursdayObject);
+            Day thursday = new Day(DayName.THURSDAY);
+            thursday.setFields(thursdayObject);
 
             JSONObject fridayObject = openingHoursObject.getJSONObject(FRIDAY_KEY);
-            Day friday = new Day();
-            friday.setFields(DayName.FRIDAY, fridayObject);
+            Day friday = new Day(DayName.FRIDAY);
+            friday.setFields(fridayObject);
 
             JSONObject saturdayObject = openingHoursObject.getJSONObject(SATURDAY_KEY);
-            Day saturday = new Day();
-            saturday.setFields(DayName.SATURDAY, saturdayObject);
+            Day saturday = new Day(DayName.SATURDAY);
+            saturday.setFields(saturdayObject);
 
             Opening_hours opening_hours = new Opening_hours(sunday, monday, tuesday, wednesday, thursday, friday, saturday);
 

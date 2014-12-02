@@ -15,10 +15,14 @@ enum DayName{
  * Created by Aaron on 01/12/2014.
  */
 public class Day {
-    private DayName dayName;
+    private final DayName dayName;
     private String closing_hour;
     private boolean is_closed;
     private String opening_hour;
+
+    public Day(DayName dayName) {
+        this.dayName = dayName;
+    }
 
     public String getClosing_hour(){
         return this.closing_hour;
@@ -43,12 +47,8 @@ public class Day {
         return dayName;
     }
 
-    public void setDayName(DayName dayName) {
-        this.dayName = dayName;
-    }
 
-    public void setFields(DayName dayName, JSONObject jsonObject) throws JSONException{
-        setDayName(dayName);
+    public void setFields(JSONObject jsonObject) throws JSONException{
         setOpening_hour(jsonObject.getString(OPENING_HOUR_KEY));
         setClosing_hour(jsonObject.getString(CLOSING_HOUR_KEY));
         setIs_closed(jsonObject.getBoolean(IS_CLOSED_KEY));
