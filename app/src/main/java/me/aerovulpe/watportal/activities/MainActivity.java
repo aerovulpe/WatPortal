@@ -111,7 +111,7 @@ public class MainActivity extends Activity {
         }
 
         @Override
-        public void setWatObject(WatObject watObject) {
+        public void onWatObjectReceivedListener(WatObject watObject) {
             //testing
             Log.d("TESTING", watObject.toString() + "\n" + watObject.getResourceType().name());
         }
