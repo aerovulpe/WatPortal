@@ -81,6 +81,11 @@ public final class Constants {
     public static final String THURSDAY_KEY = "thursday";
     public static final String FRIDAY_KEY = "friday";
     public static final String SATURDAY_KEY = "saturday";
+	
+		public static final String VENDOR_ID_KEY = "vendor_id";
+		public static final String VENDOR_NAME_KEY = "vendor_name";
+		public static final String ADDRESS_KEY = "address";
+		public static final String PHONE_NUMBER_KEY = "phone_number";
 
     private Constants() {
         // restrict instantiation

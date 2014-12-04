@@ -6,6 +6,10 @@ import java.util.List;
 import me.aerovulpe.watportal.constants.WatObject;
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.resources.Resource;
+import org.json.*;
+import java.util.*;
+
+import static me.aerovulpe.watportal.constants.Constants.*;
 
 public class WatCard implements WatObject{
    	private List<Data> data;
@@ -81,4 +85,30 @@ public class WatCard implements WatObject{
             this.vendor_name = vendor_name;
         }
     }
+	
+	public static WatCard parse(Meta meta, JSONArray dataArray) throws JSONException {
+		WatCard watcard = new WatCard();
+		
+		List<Data> data = new ArrayList<Data>();
+		
+		for (int i = 0; i < dataArray.length(); i++){
+			JSONObject dataObject = dataArray.getJSONObject(i);
+			Data dataItem = new Data();
+			
+			dataItem.setVendor_id(dataObject.getInt(VENDOR_ID_KEY));
+			dataItem.setVendor_name(dataObject.getString(VENDOR_NAME_KEY));
+			dataItem.setLatitude(dataObject.getDouble(LATITUDE_KEY));
+			dataItem.setLongitude(dataObject.getDouble(LONGITUDE_KEY));
+			dataItem.setAddress(dataObject.getString(ADDRESS_KEY));
+			dataItem.setPhone_number(dataObject.getString(PHONE_NUMBER_KEY));
+			dataItem.setLogo(dataObject.getString(LOGO_KEY));
+			
+			data.add(dataItem);
+		}
+		
+		watcard.setMeta(meta);
+		watcard.setData(data);
+		
+		return watcard;
+	}
 }

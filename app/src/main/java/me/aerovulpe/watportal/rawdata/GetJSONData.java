@@ -26,6 +26,7 @@ import static me.aerovulpe.watportal.constants.Constants.METHOD_ID_KEY;
 import static me.aerovulpe.watportal.constants.Constants.REQUESTS_KEY;
 import static me.aerovulpe.watportal.constants.Constants.STATUS_KEY;
 import static me.aerovulpe.watportal.constants.Constants.TIMESTAMP_KEY;
+import me.aerovulpe.watportal.resources.food.watcard.*;
 
 
 /**
@@ -115,6 +116,9 @@ public class GetJSONData extends GetRawData {
                 case FOOD_LOCATIONS:
                     watObject = WatLocation.parse(meta, rootObject.getJSONArray(DATA_KEY));
                   break;
+				  case FOOD_WATCARD:
+					  watObject = WatCard.parse(meta, rootObject.getJSONArray(DATA_KEY));
+					  break;
             }
 
             watObjectHandler.onWatObjectReceivedListener(watObject);
