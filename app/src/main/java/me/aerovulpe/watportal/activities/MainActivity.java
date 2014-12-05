@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -114,6 +115,7 @@ public class MainActivity extends Activity {
         @Override
         public void onWatObjectReceived(WatObject watObject) {
             //testing
+            Toast.makeText(getActivity(), "WatObject Received", Toast.LENGTH_SHORT).show();
             Log.d("TESTING", watObject.toString() + "\n" + watObject.getResourceType().name());
         }
     }
