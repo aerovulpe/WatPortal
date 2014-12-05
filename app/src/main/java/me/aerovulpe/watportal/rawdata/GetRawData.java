@@ -50,12 +50,12 @@ public class GetRawData {
         this.url = url;
     }
 
-    protected void execute() {
+    protected void execute(RawDataDownloader rawDataDownloader) {
+        rawDataDownloader.execute(url);
         downloadStatus = DownloadStatus.PROCESSING;
-        new DownloadRawData().execute(url);
     }
 
-    class DownloadRawData extends AsyncTask<String, Void, String> {
+    class RawDataDownloader extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
             HttpURLConnection urlConnection = null;

@@ -46,8 +46,7 @@ public class GetJSONData extends GetRawData {
 
     public void execute(WatObjectHandler watObjectHandler) {
         this.watObjectHandler = watObjectHandler;
-        new DownloadJSONData().execute(getUrl());
-        downloadStatus = DownloadStatus.PROCESSING;
+        execute(new JSONDataDownloader());
         Log.v(LOG_TAG, "Built URI = " + getUrl());
     }
 
@@ -60,7 +59,7 @@ public class GetJSONData extends GetRawData {
         return uriBuilder.build();
     }
 
-    public class DownloadJSONData extends DownloadRawData {
+    public class JSONDataDownloader extends RawDataDownloader {
         @Override
         protected String doInBackground(String... params) {
             return super.doInBackground(params);
@@ -118,6 +117,7 @@ public class GetJSONData extends GetRawData {
             }
 
             watObjectHandler.onWatObjectReceived(watObject);
+            reset();
         }
     }
 }
