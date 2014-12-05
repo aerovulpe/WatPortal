@@ -22,7 +22,7 @@ public class GetRawData {
     private static final String LOG_TAG = GetRawData.class.getSimpleName();
     private String url;
     private String data;
-    private DownloadStatus downloadStatus;
+    protected DownloadStatus downloadStatus;
 
     public GetRawData() {
         downloadStatus = DownloadStatus.IDLE;
@@ -50,7 +50,7 @@ public class GetRawData {
         this.url = url;
     }
 
-    public void execute() {
+    protected void execute() {
         downloadStatus = DownloadStatus.PROCESSING;
         new DownloadRawData().execute(url);
     }

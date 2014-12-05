@@ -15,6 +15,7 @@ import me.aerovulpe.watportal.resources.food.locations.WatLocation;
 import me.aerovulpe.watportal.resources.food.menu.WatMenu;
 import me.aerovulpe.watportal.resources.food.notes.WatNote;
 import me.aerovulpe.watportal.resources.food.outlets.WatOutlet;
+import me.aerovulpe.watportal.resources.food.watcard.WatCard;
 
 import static me.aerovulpe.watportal.constants.Constants.API_KEY;
 import static me.aerovulpe.watportal.constants.Constants.API_KEY_PARAM;
@@ -26,7 +27,6 @@ import static me.aerovulpe.watportal.constants.Constants.METHOD_ID_KEY;
 import static me.aerovulpe.watportal.constants.Constants.REQUESTS_KEY;
 import static me.aerovulpe.watportal.constants.Constants.STATUS_KEY;
 import static me.aerovulpe.watportal.constants.Constants.TIMESTAMP_KEY;
-import me.aerovulpe.watportal.resources.food.watcard.*;
 
 
 /**
@@ -44,15 +44,11 @@ public class GetJSONData extends GetRawData {
         setUrl(buildCourseUri(resource, params).toString());
     }
 
-    @Override
-    public void execute() {
-        new DownloadJSONData().execute(getUrl());
-        Log.v(LOG_TAG, "Built URI = " + getUrl());
-    }
-
     public void execute(WatObjectHandler watObjectHandler) {
         this.watObjectHandler = watObjectHandler;
-        execute();
+        new DownloadJSONData().execute(getUrl());
+        downloadStatus = DownloadStatus.PROCESSING;
+        Log.v(LOG_TAG, "Built URI = " + getUrl());
     }
 
     private Uri buildCourseUri(Resource resource, String... params) {
@@ -115,13 +111,13 @@ public class GetJSONData extends GetRawData {
                     break;
                 case FOOD_LOCATIONS:
                     watObject = WatLocation.parse(meta, rootObject.getJSONArray(DATA_KEY));
-                  break;
-				  case FOOD_WATCARD:
-					  watObject = WatCard.parse(meta, rootObject.getJSONArray(DATA_KEY));
-					  break;
+                    break;
+                case FOOD_WATCARD:
+                    watObject = WatCard.parse(meta, rootObject.getJSONArray(DATA_KEY));
+                    break;
             }
 
-            watObjectHandler.onWatObjectReceivedListener(watObject);
+            watObjectHandler.onWatObjectReceived(watObject);
         }
     }
 }

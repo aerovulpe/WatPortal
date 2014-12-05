@@ -1,7 +1,5 @@
 package me.aerovulpe.watportal.resources.food.locations;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -229,7 +227,7 @@ public class WatLocation implements WatObject {
                 try {
                     dates.add(DATE_FORMAT.parse(datesClosedArray.getString(k)));
                 } catch (ParseException e) {
-                    Log.e(LOG_TAG, "Parsing date string failed!");
+                    e.printStackTrace();
                 }
             }
 
