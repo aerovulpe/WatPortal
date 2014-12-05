@@ -117,7 +117,6 @@ public class GetJSONData extends GetRawData {
             }
 
             watObjectHandler.onWatObjectReceived(watObject);
-            reset();
         }
     }
 }
