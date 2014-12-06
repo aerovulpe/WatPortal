@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import me.aerovulpe.watportal.R;
 import me.aerovulpe.watportal.constants.WatObject;
 import me.aerovulpe.watportal.constants.WatObjectHandler;
-import me.aerovulpe.watportal.rawdata.GetJSONData;
-import me.aerovulpe.watportal.resources.Resource;
 
 
 public class MainActivity extends Activity {
@@ -107,7 +105,9 @@ public class MainActivity extends Activity {
                     //new GetJSONData(Resource.FOOD_DIETS, args).execute(PlaceholderFragment.this);
                     //new GetJSONData(Resource.FOOD_OUTLETS, args).execute(PlaceholderFragment.this);
                     //new GetJSONData(Resource.FOOD_LOCATIONS, args).execute(PlaceholderFragment.this);
-                    new GetJSONData(Resource.FOOD_WATCARD, args).execute(PlaceholderFragment.this);
+                    //new GetJSONData(Resource.FOOD_WATCARD, args).execute(PlaceholderFragment.this);
+                    //new GetJSONData(Resource.FOOD_ANNOUNCEMENTS, args).execute(PlaceholderFragment.this);
+                    //new GetJSONData(Resource.FOOD_PRODUCTS, args).execute(PlaceholderFragment.this);
                 }
             });
         }

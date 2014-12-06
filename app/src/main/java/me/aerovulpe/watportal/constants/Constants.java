@@ -87,6 +87,35 @@ public final class Constants {
     public static final String ADDRESS_KEY = "address";
     public static final String PHONE_NUMBER_KEY = "phone_number";
 
+    public static final String AD_TEXT_KEY = "ad_text";
+
+    public static final String INGREDIENTS_KEY = "ingredients";
+    public static final String SERVING_SIZE_KEY = "serving_size";
+    public static final String SERVING_SIZE_ML_KEY = "serving_size_ml";
+    public static final String SERVING_SIZE_G_KEY = "serving_size_g";
+    public static final String CALORIES_KEY = "calories";
+    public static final String TOTAL_FAT_G_KEY = "total_fat_g";
+    public static final String TOTAL_FAT_PERCENT_KEY = "total_fat_percent";
+    public static final String FAT_SATURATED_G_KEY = "fat_saturated_g";
+    public static final String FAT_SATURATED_PERCENT_KEY = "fat_saturated_percent";
+    public static final String FAT_TRANS_G_KEY = "fat_trans_g";
+    public static final String FAT_TRANS_PERCENT_KEY = "fat_trans_percent";
+    public static final String CHOLESTEROL_MG_KEY = "cholesterol_mg";
+    public static final String SODIUM_MG_KEY = "sodium_mg";
+    public static final String SODIUM_PERCENT_KEY = "sodium_percent";
+    public static final String CARBO_G_KEY = "carbo_g";
+    public static final String CARBO_PERCENT_KEY = "carbo_percent";
+    public static final String CARBO_FIBRE_G_KEY = "carbo_fibre_g";
+    public static final String CARBO_FIBRE_PERCENT_KEY = "carbo_fibre_percent";
+    public static final String CARBO_SUGARS_G_KEY = "carbo_sugars_g";
+    public static final String PROTEIN_G_KEY = "protein_g";
+    public static final String VITAMIN_A_PERCENT_KEY = "vitamin_a_percent";
+    public static final String VITAMIN_C_PERCENT_KEY = "vitamin_c_percent";
+    public static final String CALCIUM_PERCENT_KEY = "calcium_percent";
+    public static final String IRON_PERCENT_KEY = "iron_percent";
+    public static final String MICRO_NUTRIENTS_KEY = "micro_nutrients";
+    public static final String TIPS_KEY = "tips";
+
     private Constants() {
         // restrict instantiation
     }

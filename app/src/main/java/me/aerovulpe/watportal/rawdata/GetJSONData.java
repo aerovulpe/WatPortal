@@ -10,11 +10,13 @@ import me.aerovulpe.watportal.constants.WatObject;
 import me.aerovulpe.watportal.constants.WatObjectHandler;
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.resources.Resource;
+import me.aerovulpe.watportal.resources.food.announcements.WatAnnouncement;
 import me.aerovulpe.watportal.resources.food.diets.WatDiet;
 import me.aerovulpe.watportal.resources.food.locations.WatLocation;
 import me.aerovulpe.watportal.resources.food.menu.WatMenu;
 import me.aerovulpe.watportal.resources.food.notes.WatNote;
 import me.aerovulpe.watportal.resources.food.outlets.WatOutlet;
+import me.aerovulpe.watportal.resources.food.products.WatProduct;
 import me.aerovulpe.watportal.resources.food.watcard.WatCard;
 
 import static me.aerovulpe.watportal.constants.Constants.API_KEY;
@@ -113,6 +115,12 @@ public class GetJSONData extends GetRawData {
                     break;
                 case FOOD_WATCARD:
                     watObject = WatCard.parse(meta, rootObject.getJSONArray(DATA_KEY));
+                    break;
+                case FOOD_ANNOUNCEMENTS:
+                    watObject = WatAnnouncement.parse(meta, rootObject.getJSONArray(DATA_KEY));
+                    break;
+                case FOOD_PRODUCTS:
+                    watObject = WatProduct.parse(meta, rootObject.getJSONObject(DATA_KEY));
                     break;
             }
 

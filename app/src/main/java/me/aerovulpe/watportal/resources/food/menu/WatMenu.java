@@ -1,7 +1,5 @@
 package me.aerovulpe.watportal.resources.food.menu;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,8 +7,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.constants.WatObject;
+import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.resources.Resource;
 
 import static me.aerovulpe.watportal.constants.Constants.DATE_KEY;
@@ -131,11 +129,7 @@ public class WatMenu implements WatObject {
                     JSONObject lunchObject = lunchArray.getJSONObject(k);
                     Lunch lunch = new Lunch();
                     lunch.setProduct_name(lunchObject.getString(PRODUCT_NAME_KEY));
-                    try {
-                        lunch.setProduct_id(lunchObject.getInt(PRODUCT_ID_KEY));
-                    } catch (JSONException e) {
-                        Log.e(LOG_TAG, "PRODUCT ID IS NULL");
-                    }
+                    lunch.setProduct_id(lunchObject.optInt(PRODUCT_ID_KEY));
                     lunch.setDiet_type(lunchObject.getString(DIET_TYPE_KEY));
                     lunches.add(lunch);
                 }
@@ -144,11 +138,7 @@ public class WatMenu implements WatObject {
                     JSONObject dinnerObject = dinnerArray.getJSONObject(l);
                     Dinner dinner = new Dinner();
                     dinner.setProduct_name(dinnerObject.getString(PRODUCT_NAME_KEY));
-                    try {
-                        dinner.setProduct_id(dinnerObject.getInt(PRODUCT_ID_KEY));
-                    } catch (JSONException e) {
-                        Log.e(LOG_TAG, "PRODUCT ID IS NULL");
-                    }
+                    dinner.setProduct_id(dinnerObject.optInt(PRODUCT_ID_KEY));
                     dinner.setDiet_type(dinnerObject.getString(DIET_TYPE_KEY));
                     dinners.add(dinner);
                 }
