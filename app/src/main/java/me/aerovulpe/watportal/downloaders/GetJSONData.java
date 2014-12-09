@@ -62,9 +62,8 @@ public class GetJSONData extends GetRawData {
             new Thread(){
                 @Override
                 public void run() {
-                    WatObject watObject = null;
                     try {
-                        watObject = WatObject.parse(mResource, new JSONObject(getData()));
+                        WatObject watObject = WatObject.parse(mResource, new JSONObject(getData()));
                         mWatObjectHandler.onWatObjectReceived(watObject);
                     } catch (JSONException e) {
                         Log.e(LOG_TAG, "Error processing JSON data, watObject is null!", e);

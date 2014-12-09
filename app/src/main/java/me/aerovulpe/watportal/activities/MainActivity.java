@@ -17,8 +17,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import me.aerovulpe.watportal.R;
-import me.aerovulpe.watportal.downloaders.GetJSONData;
-import me.aerovulpe.watportal.resources.Resource;
 import me.aerovulpe.watportal.resources.WatObject;
 import me.aerovulpe.watportal.resources.WatObjectHandler;
 
@@ -102,7 +100,7 @@ public class MainActivity extends Activity {
                     ((TextView) getView().findViewById(R.id.textView)).setText("Check LogCat for data returned.");
 
                     String[] args = params.toArray(new String[params.size()]);
-                    new GetJSONData(Resource.FOOD_MENU, args).execute(PlaceholderFragment.this);
+                    //new GetJSONData(Resource.FOOD_MENU, args).execute(PlaceholderFragment.this);
                     //new GetJSONData(Resource.FOOD_NOTES, args).execute(PlaceholderFragment.this);
                     //new GetJSONData(Resource.FOOD_DIETS, args).execute(PlaceholderFragment.this);
                     //new GetJSONData(Resource.FOOD_OUTLETS, args).execute(PlaceholderFragment.this);
@@ -121,12 +119,6 @@ public class MainActivity extends Activity {
                 @Override
                 public void run() {
                     Toast.makeText(getActivity(), "WatObject Received", Toast.LENGTH_SHORT).show();
-
-                    if (watObject == null){
-                        Toast.makeText(getActivity(), "No Data Was Received", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
                     Log.d("TESTING", watObject.toString());
                     Log.d("TESTING", watObject.getResourceType().name());
                 }
