@@ -24,21 +24,17 @@ import static me.aerovulpe.watportal.Constants.TIMESTAMP_KEY;
  * Created by Aaron on 26/11/2014.
  */
 public abstract class WatObject {
-    private static Resource sResourceType;
+    private final Resource mResource;
 
-    protected WatObject(Resource resourceType){
-        setResourceType(resourceType);
+    protected WatObject(Resource resourceType) {
+        mResource = resourceType;
     }
 
-    public Resource getResourceType(){
-        return sResourceType;
+    public final Resource getResourceType() {
+        return mResource;
     }
 
-    protected static void setResourceType(Resource resourceType){
-        sResourceType = resourceType;
-    }
-
-    public static WatObject parse(Resource resourceType, JSONObject rootObject) throws JSONException{
+    public final static WatObject parse(Resource resourceType, JSONObject rootObject) throws JSONException {
         WatObject watObject = null;
 
         JSONObject metaObject = rootObject.getJSONObject(META_KEY);

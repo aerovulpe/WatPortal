@@ -46,10 +46,6 @@ public class GetJSONData extends GetRawData {
     }
 
     public class JSONDataDownloader extends RawDataDownloader {
-        @Override
-        protected String doInBackground(String... params) {
-            return super.doInBackground(params);
-        }
 
         @Override
         protected void onPostExecute(String result) {
