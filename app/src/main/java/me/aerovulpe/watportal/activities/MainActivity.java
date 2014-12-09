@@ -113,11 +113,16 @@ public class MainActivity extends Activity {
         }
 
         @Override
-        public void onWatObjectReceived(WatObject watObject) {
+        public void onWatObjectReceived(final WatObject watObject) {
             //testing
-            Toast.makeText(getActivity(), "WatObject Received", Toast.LENGTH_SHORT).show();
-            Log.d("TESTING", watObject.toString());
-            Log.d("TESTING", watObject.getResourceType().name());
+            getActivity().runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(), "WatObject Received", Toast.LENGTH_SHORT).show();
+                    Log.d("TESTING", watObject.toString());
+                    Log.d("TESTING", watObject.getResourceType().name());
+                }
+            });
         }
     }
 }

@@ -50,24 +50,27 @@ public class GetJSONData extends GetRawData {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-            try {
                 processResult();
-            } catch (JSONException e) {
-                e.printStackTrace();
-                Log.e(LOG_TAG, "Error processing JSON data");
-            }
         }
 
-        private void processResult() throws JSONException {
+        private void processResult() {
             if (getDownloadStatus() != DownloadStatus.OK) {
                 Log.e(LOG_TAG, "Error downloading raw data file!");
                 return;
             }
 
-            WatObject watObject = WatObject.parse(mResource, new JSONObject(getData()));
-
-            mWatObjectHandler.onWatObjectReceived(watObject);
+            new Thread(){
+                @Override
+                public void run() {
+                    WatObject watObject = null;
+                    try {
+                        watObject = WatObject.parse(mResource, new JSONObject(getData()));
+                    } catch (JSONException e) {
+                        Log.e(LOG_TAG, "Error processing JSON data", e);
+                    }
+                    mWatObjectHandler.onWatObjectReceived(watObject);
+                }
+            }.start();
         }
     }
 }
