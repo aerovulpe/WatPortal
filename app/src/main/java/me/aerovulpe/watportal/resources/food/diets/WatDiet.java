@@ -9,14 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.aerovulpe.watportal.resources.Meta;
-import me.aerovulpe.watportal.constants.WatObject;
+import me.aerovulpe.watportal.resources.WatObject;
 import me.aerovulpe.watportal.resources.Resource;
 
-import static me.aerovulpe.watportal.constants.Constants.*;
+import static me.aerovulpe.watportal.Constants.*;
 
-public class WatDiet implements WatObject{
+public class WatDiet extends WatObject{
    	private List<Data> data;
    	private Meta meta;
+
+    public WatDiet(){
+       super(Resource.FOOD_DIETS);
+    }
 
  	public List<Data> getData(){
 		return this.data;
@@ -30,11 +34,6 @@ public class WatDiet implements WatObject{
 	public void setMeta(Meta meta){
 		this.meta = meta;
 	}
-
-    @Override
-    public Resource getResourceType() {
-        return Resource.FOOD_DIETS;
-    }
 
     public static class Data{
            private int diet_id;

@@ -17,8 +17,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import me.aerovulpe.watportal.R;
-import me.aerovulpe.watportal.constants.WatObject;
-import me.aerovulpe.watportal.constants.WatObjectHandler;
+import me.aerovulpe.watportal.resources.WatObject;
+import me.aerovulpe.watportal.resources.WatObjectHandler;
 
 
 public class MainActivity extends Activity {
@@ -116,7 +116,8 @@ public class MainActivity extends Activity {
         public void onWatObjectReceived(WatObject watObject) {
             //testing
             Toast.makeText(getActivity(), "WatObject Received", Toast.LENGTH_SHORT).show();
-            Log.d("TESTING", watObject.toString() + "\n" + watObject.getResourceType().name());
+            Log.d("TESTING", watObject.toString());
+            Log.d("TESTING", watObject.getResourceType().name());
         }
     }
 }

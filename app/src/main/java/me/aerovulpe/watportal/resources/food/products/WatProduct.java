@@ -3,44 +3,48 @@ package me.aerovulpe.watportal.resources.food.products;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import me.aerovulpe.watportal.constants.WatObject;
+import me.aerovulpe.watportal.resources.WatObject;
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.resources.Resource;
 
-import static me.aerovulpe.watportal.constants.Constants.CALCIUM_PERCENT_KEY;
-import static me.aerovulpe.watportal.constants.Constants.CALORIES_KEY;
-import static me.aerovulpe.watportal.constants.Constants.CARBO_FIBRE_G_KEY;
-import static me.aerovulpe.watportal.constants.Constants.CARBO_FIBRE_PERCENT_KEY;
-import static me.aerovulpe.watportal.constants.Constants.CARBO_G_KEY;
-import static me.aerovulpe.watportal.constants.Constants.CARBO_PERCENT_KEY;
-import static me.aerovulpe.watportal.constants.Constants.CARBO_SUGARS_G_KEY;
-import static me.aerovulpe.watportal.constants.Constants.CHOLESTEROL_MG_KEY;
-import static me.aerovulpe.watportal.constants.Constants.DIET_ID_KEY;
-import static me.aerovulpe.watportal.constants.Constants.DIET_TYPE_KEY;
-import static me.aerovulpe.watportal.constants.Constants.FAT_SATURATED_G_KEY;
-import static me.aerovulpe.watportal.constants.Constants.FAT_SATURATED_PERCENT_KEY;
-import static me.aerovulpe.watportal.constants.Constants.FAT_TRANS_G_KEY;
-import static me.aerovulpe.watportal.constants.Constants.FAT_TRANS_PERCENT_KEY;
-import static me.aerovulpe.watportal.constants.Constants.INGREDIENTS_KEY;
-import static me.aerovulpe.watportal.constants.Constants.IRON_PERCENT_KEY;
-import static me.aerovulpe.watportal.constants.Constants.MICRO_NUTRIENTS_KEY;
-import static me.aerovulpe.watportal.constants.Constants.PRODUCT_ID_KEY;
-import static me.aerovulpe.watportal.constants.Constants.PRODUCT_NAME_KEY;
-import static me.aerovulpe.watportal.constants.Constants.PROTEIN_G_KEY;
-import static me.aerovulpe.watportal.constants.Constants.SERVING_SIZE_G_KEY;
-import static me.aerovulpe.watportal.constants.Constants.SERVING_SIZE_KEY;
-import static me.aerovulpe.watportal.constants.Constants.SERVING_SIZE_ML_KEY;
-import static me.aerovulpe.watportal.constants.Constants.SODIUM_MG_KEY;
-import static me.aerovulpe.watportal.constants.Constants.SODIUM_PERCENT_KEY;
-import static me.aerovulpe.watportal.constants.Constants.TIPS_KEY;
-import static me.aerovulpe.watportal.constants.Constants.TOTAL_FAT_G_KEY;
-import static me.aerovulpe.watportal.constants.Constants.TOTAL_FAT_PERCENT_KEY;
-import static me.aerovulpe.watportal.constants.Constants.VITAMIN_A_PERCENT_KEY;
-import static me.aerovulpe.watportal.constants.Constants.VITAMIN_C_PERCENT_KEY;
+import static me.aerovulpe.watportal.Constants.CALCIUM_PERCENT_KEY;
+import static me.aerovulpe.watportal.Constants.CALORIES_KEY;
+import static me.aerovulpe.watportal.Constants.CARBO_FIBRE_G_KEY;
+import static me.aerovulpe.watportal.Constants.CARBO_FIBRE_PERCENT_KEY;
+import static me.aerovulpe.watportal.Constants.CARBO_G_KEY;
+import static me.aerovulpe.watportal.Constants.CARBO_PERCENT_KEY;
+import static me.aerovulpe.watportal.Constants.CARBO_SUGARS_G_KEY;
+import static me.aerovulpe.watportal.Constants.CHOLESTEROL_MG_KEY;
+import static me.aerovulpe.watportal.Constants.DIET_ID_KEY;
+import static me.aerovulpe.watportal.Constants.DIET_TYPE_KEY;
+import static me.aerovulpe.watportal.Constants.FAT_SATURATED_G_KEY;
+import static me.aerovulpe.watportal.Constants.FAT_SATURATED_PERCENT_KEY;
+import static me.aerovulpe.watportal.Constants.FAT_TRANS_G_KEY;
+import static me.aerovulpe.watportal.Constants.FAT_TRANS_PERCENT_KEY;
+import static me.aerovulpe.watportal.Constants.INGREDIENTS_KEY;
+import static me.aerovulpe.watportal.Constants.IRON_PERCENT_KEY;
+import static me.aerovulpe.watportal.Constants.MICRO_NUTRIENTS_KEY;
+import static me.aerovulpe.watportal.Constants.PRODUCT_ID_KEY;
+import static me.aerovulpe.watportal.Constants.PRODUCT_NAME_KEY;
+import static me.aerovulpe.watportal.Constants.PROTEIN_G_KEY;
+import static me.aerovulpe.watportal.Constants.SERVING_SIZE_G_KEY;
+import static me.aerovulpe.watportal.Constants.SERVING_SIZE_KEY;
+import static me.aerovulpe.watportal.Constants.SERVING_SIZE_ML_KEY;
+import static me.aerovulpe.watportal.Constants.SODIUM_MG_KEY;
+import static me.aerovulpe.watportal.Constants.SODIUM_PERCENT_KEY;
+import static me.aerovulpe.watportal.Constants.TIPS_KEY;
+import static me.aerovulpe.watportal.Constants.TOTAL_FAT_G_KEY;
+import static me.aerovulpe.watportal.Constants.TOTAL_FAT_PERCENT_KEY;
+import static me.aerovulpe.watportal.Constants.VITAMIN_A_PERCENT_KEY;
+import static me.aerovulpe.watportal.Constants.VITAMIN_C_PERCENT_KEY;
 
-public class WatProduct implements WatObject {
+public class WatProduct extends WatObject {
     private Data data;
     private Meta meta;
+
+    public WatProduct() {
+        super(Resource.FOOD_PRODUCTS);
+    }
 
     public Data getData() {
         return this.data;
@@ -56,11 +60,6 @@ public class WatProduct implements WatObject {
 
     public void setMeta(Meta meta) {
         this.meta = meta;
-    }
-
-    @Override
-    public Resource getResourceType() {
-        return Resource.FOOD_PRODUCTS;
     }
 
     public static class Data {

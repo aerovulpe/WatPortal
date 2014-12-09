@@ -9,19 +9,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import me.aerovulpe.watportal.constants.WatObject;
+import me.aerovulpe.watportal.resources.WatObject;
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.resources.Resource;
 
-import static me.aerovulpe.watportal.constants.Constants.DATE_FORMAT;
-import static me.aerovulpe.watportal.constants.Constants.DATE_KEY;
-import static me.aerovulpe.watportal.constants.Constants.NOTE_KEY;
-import static me.aerovulpe.watportal.constants.Constants.OUTLET_ID_KEY;
-import static me.aerovulpe.watportal.constants.Constants.OUTLET_NAME_KEY;
+import static me.aerovulpe.watportal.Constants.DATE_FORMAT;
+import static me.aerovulpe.watportal.Constants.DATE_KEY;
+import static me.aerovulpe.watportal.Constants.NOTE_KEY;
+import static me.aerovulpe.watportal.Constants.OUTLET_ID_KEY;
+import static me.aerovulpe.watportal.Constants.OUTLET_NAME_KEY;
 
-public class WatNote implements WatObject{
+public class WatNote extends WatObject{
     private List<Data> data;
     private Meta meta;
+
+    public WatNote() {
+        super(Resource.FOOD_NOTES);
+    }
 
     public List<Data> getData() {
         return this.data;
@@ -37,11 +41,6 @@ public class WatNote implements WatObject{
 
     public void setMeta(Meta meta) {
         this.meta = meta;
-    }
-
-    @Override
-    public Resource getResourceType() {
-        return Resource.FOOD_NOTES;
     }
 
     public static class Data {

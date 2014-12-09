@@ -9,17 +9,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import me.aerovulpe.watportal.constants.WatObject;
+import me.aerovulpe.watportal.resources.WatObject;
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.resources.Resource;
 
-import static me.aerovulpe.watportal.constants.Constants.AD_TEXT_KEY;
-import static me.aerovulpe.watportal.constants.Constants.DATE_FORMAT;
-import static me.aerovulpe.watportal.constants.Constants.DATE_KEY;
+import static me.aerovulpe.watportal.Constants.AD_TEXT_KEY;
+import static me.aerovulpe.watportal.Constants.DATE_FORMAT;
+import static me.aerovulpe.watportal.Constants.DATE_KEY;
 
-public class WatAnnouncement implements WatObject {
+public class WatAnnouncement extends WatObject {
     private List<Data> data;
     private Meta meta;
+
+    public WatAnnouncement(){
+        super(Resource.FOOD_ANNOUNCEMENTS);
+    }
 
     public List<Data> getData() {
         return this.data;
@@ -35,11 +39,6 @@ public class WatAnnouncement implements WatObject {
 
     public void setMeta(Meta meta) {
         this.meta = meta;
-    }
-
-    @Override
-    public Resource getResourceType() {
-        return Resource.FOOD_ANNOUNCEMENTS;
     }
 
     public static class Data {

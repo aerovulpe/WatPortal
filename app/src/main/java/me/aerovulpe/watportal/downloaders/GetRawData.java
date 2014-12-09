@@ -1,4 +1,4 @@
-package me.aerovulpe.watportal.rawdata;
+package me.aerovulpe.watportal.downloaders;
 
 import android.os.AsyncTask;
 import android.util.Log;

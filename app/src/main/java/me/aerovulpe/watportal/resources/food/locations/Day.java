@@ -3,9 +3,9 @@ package me.aerovulpe.watportal.resources.food.locations;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static me.aerovulpe.watportal.constants.Constants.CLOSING_HOUR_KEY;
-import static me.aerovulpe.watportal.constants.Constants.IS_CLOSED_KEY;
-import static me.aerovulpe.watportal.constants.Constants.OPENING_HOUR_KEY;
+import static me.aerovulpe.watportal.Constants.CLOSING_HOUR_KEY;
+import static me.aerovulpe.watportal.Constants.IS_CLOSED_KEY;
+import static me.aerovulpe.watportal.Constants.OPENING_HOUR_KEY;
 
 enum DayName{
     SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY

@@ -7,33 +7,37 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.aerovulpe.watportal.constants.WatObject;
+import me.aerovulpe.watportal.resources.WatObject;
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.resources.Resource;
 
-import static me.aerovulpe.watportal.constants.Constants.DATE_KEY;
-import static me.aerovulpe.watportal.constants.Constants.DAY_KEY;
-import static me.aerovulpe.watportal.constants.Constants.DIET_TYPE_KEY;
-import static me.aerovulpe.watportal.constants.Constants.DINNER_KEY;
-import static me.aerovulpe.watportal.constants.Constants.END_KEY;
-import static me.aerovulpe.watportal.constants.Constants.LUNCH_KEY;
-import static me.aerovulpe.watportal.constants.Constants.MEALS_KEY;
-import static me.aerovulpe.watportal.constants.Constants.MENU_KEY;
-import static me.aerovulpe.watportal.constants.Constants.NOTES_KEY;
-import static me.aerovulpe.watportal.constants.Constants.OUTLETS_KEY;
-import static me.aerovulpe.watportal.constants.Constants.OUTLET_ID_KEY;
-import static me.aerovulpe.watportal.constants.Constants.OUTLET_NAME_KEY;
-import static me.aerovulpe.watportal.constants.Constants.PRODUCT_ID_KEY;
-import static me.aerovulpe.watportal.constants.Constants.PRODUCT_NAME_KEY;
-import static me.aerovulpe.watportal.constants.Constants.START_KEY;
-import static me.aerovulpe.watportal.constants.Constants.WEEK_KEY;
-import static me.aerovulpe.watportal.constants.Constants.YEAR_KEY;
+import static me.aerovulpe.watportal.Constants.DATE_KEY;
+import static me.aerovulpe.watportal.Constants.DAY_KEY;
+import static me.aerovulpe.watportal.Constants.DIET_TYPE_KEY;
+import static me.aerovulpe.watportal.Constants.DINNER_KEY;
+import static me.aerovulpe.watportal.Constants.END_KEY;
+import static me.aerovulpe.watportal.Constants.LUNCH_KEY;
+import static me.aerovulpe.watportal.Constants.MEALS_KEY;
+import static me.aerovulpe.watportal.Constants.MENU_KEY;
+import static me.aerovulpe.watportal.Constants.NOTES_KEY;
+import static me.aerovulpe.watportal.Constants.OUTLETS_KEY;
+import static me.aerovulpe.watportal.Constants.OUTLET_ID_KEY;
+import static me.aerovulpe.watportal.Constants.OUTLET_NAME_KEY;
+import static me.aerovulpe.watportal.Constants.PRODUCT_ID_KEY;
+import static me.aerovulpe.watportal.Constants.PRODUCT_NAME_KEY;
+import static me.aerovulpe.watportal.Constants.START_KEY;
+import static me.aerovulpe.watportal.Constants.WEEK_KEY;
+import static me.aerovulpe.watportal.Constants.YEAR_KEY;
 
-public class WatMenu implements WatObject {
+public class WatMenu extends WatObject {
     private static final String LOG_TAG = WatMenu.class.getName();
 
     private Data data;
     private Meta meta;
+
+    public WatMenu(){
+        super(Resource.FOOD_MENU);
+    }
 
     public Data getData() {
         return this.data;
@@ -49,11 +53,6 @@ public class WatMenu implements WatObject {
 
     public void setMeta(Meta meta) {
         this.meta = meta;
-    }
-
-    @Override
-    public Resource getResourceType() {
-        return Resource.FOOD_MENU;
     }
 
     public static class Data {

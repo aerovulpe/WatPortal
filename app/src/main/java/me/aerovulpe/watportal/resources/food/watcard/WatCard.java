@@ -7,21 +7,25 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.aerovulpe.watportal.constants.WatObject;
+import me.aerovulpe.watportal.resources.WatObject;
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.resources.Resource;
 
-import static me.aerovulpe.watportal.constants.Constants.ADDRESS_KEY;
-import static me.aerovulpe.watportal.constants.Constants.LATITUDE_KEY;
-import static me.aerovulpe.watportal.constants.Constants.LOGO_KEY;
-import static me.aerovulpe.watportal.constants.Constants.LONGITUDE_KEY;
-import static me.aerovulpe.watportal.constants.Constants.PHONE_NUMBER_KEY;
-import static me.aerovulpe.watportal.constants.Constants.VENDOR_ID_KEY;
-import static me.aerovulpe.watportal.constants.Constants.VENDOR_NAME_KEY;
+import static me.aerovulpe.watportal.Constants.ADDRESS_KEY;
+import static me.aerovulpe.watportal.Constants.LATITUDE_KEY;
+import static me.aerovulpe.watportal.Constants.LOGO_KEY;
+import static me.aerovulpe.watportal.Constants.LONGITUDE_KEY;
+import static me.aerovulpe.watportal.Constants.PHONE_NUMBER_KEY;
+import static me.aerovulpe.watportal.Constants.VENDOR_ID_KEY;
+import static me.aerovulpe.watportal.Constants.VENDOR_NAME_KEY;
 
-public class WatCard implements WatObject {
+public class WatCard extends WatObject {
     private List<Data> data;
     private Meta meta;
+
+    public WatCard() {
+        super(Resource.FOOD_WATCARD);
+    }
 
     public List<Data> getData() {
         return this.data;
@@ -37,11 +41,6 @@ public class WatCard implements WatObject {
 
     public void setMeta(Meta meta) {
         this.meta = meta;
-    }
-
-    @Override
-    public Resource getResourceType() {
-        return Resource.FOOD_WATCARD;
     }
 
     public static class Data {

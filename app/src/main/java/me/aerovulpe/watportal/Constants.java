@@ -1,4 +1,4 @@
-package me.aerovulpe.watportal.constants;
+package me.aerovulpe.watportal;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

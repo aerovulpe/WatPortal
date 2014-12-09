@@ -9,39 +9,43 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import me.aerovulpe.watportal.constants.WatObject;
+import me.aerovulpe.watportal.resources.WatObject;
 import me.aerovulpe.watportal.resources.Meta;
 import me.aerovulpe.watportal.resources.Resource;
 
-import static me.aerovulpe.watportal.constants.Constants.BUILDING_KEY;
-import static me.aerovulpe.watportal.constants.Constants.CLOSING_HOUR_KEY;
-import static me.aerovulpe.watportal.constants.Constants.DATES_CLOSED_KEY;
-import static me.aerovulpe.watportal.constants.Constants.DATE_FORMAT;
-import static me.aerovulpe.watportal.constants.Constants.DATE_KEY;
-import static me.aerovulpe.watportal.constants.Constants.DESCRIPTION_KEY;
-import static me.aerovulpe.watportal.constants.Constants.FRIDAY_KEY;
-import static me.aerovulpe.watportal.constants.Constants.IS_OPEN_NOW_KEY;
-import static me.aerovulpe.watportal.constants.Constants.LATITUDE_KEY;
-import static me.aerovulpe.watportal.constants.Constants.LOGO_KEY;
-import static me.aerovulpe.watportal.constants.Constants.LONGITUDE_KEY;
-import static me.aerovulpe.watportal.constants.Constants.MONDAY_KEY;
-import static me.aerovulpe.watportal.constants.Constants.NOTICE_KEY;
-import static me.aerovulpe.watportal.constants.Constants.OPENING_HOURS_KEY;
-import static me.aerovulpe.watportal.constants.Constants.OPENING_HOUR_KEY;
-import static me.aerovulpe.watportal.constants.Constants.OUTLET_ID_KEY;
-import static me.aerovulpe.watportal.constants.Constants.OUTLET_NAME_KEY;
-import static me.aerovulpe.watportal.constants.Constants.SATURDAY_KEY;
-import static me.aerovulpe.watportal.constants.Constants.SPECIAL_HOURS_KEY;
-import static me.aerovulpe.watportal.constants.Constants.SUNDAY_KEY;
-import static me.aerovulpe.watportal.constants.Constants.THURSDAY_KEY;
-import static me.aerovulpe.watportal.constants.Constants.TUESDAY_KEY;
-import static me.aerovulpe.watportal.constants.Constants.WEDNESDAY_KEY;
+import static me.aerovulpe.watportal.Constants.BUILDING_KEY;
+import static me.aerovulpe.watportal.Constants.CLOSING_HOUR_KEY;
+import static me.aerovulpe.watportal.Constants.DATES_CLOSED_KEY;
+import static me.aerovulpe.watportal.Constants.DATE_FORMAT;
+import static me.aerovulpe.watportal.Constants.DATE_KEY;
+import static me.aerovulpe.watportal.Constants.DESCRIPTION_KEY;
+import static me.aerovulpe.watportal.Constants.FRIDAY_KEY;
+import static me.aerovulpe.watportal.Constants.IS_OPEN_NOW_KEY;
+import static me.aerovulpe.watportal.Constants.LATITUDE_KEY;
+import static me.aerovulpe.watportal.Constants.LOGO_KEY;
+import static me.aerovulpe.watportal.Constants.LONGITUDE_KEY;
+import static me.aerovulpe.watportal.Constants.MONDAY_KEY;
+import static me.aerovulpe.watportal.Constants.NOTICE_KEY;
+import static me.aerovulpe.watportal.Constants.OPENING_HOURS_KEY;
+import static me.aerovulpe.watportal.Constants.OPENING_HOUR_KEY;
+import static me.aerovulpe.watportal.Constants.OUTLET_ID_KEY;
+import static me.aerovulpe.watportal.Constants.OUTLET_NAME_KEY;
+import static me.aerovulpe.watportal.Constants.SATURDAY_KEY;
+import static me.aerovulpe.watportal.Constants.SPECIAL_HOURS_KEY;
+import static me.aerovulpe.watportal.Constants.SUNDAY_KEY;
+import static me.aerovulpe.watportal.Constants.THURSDAY_KEY;
+import static me.aerovulpe.watportal.Constants.TUESDAY_KEY;
+import static me.aerovulpe.watportal.Constants.WEDNESDAY_KEY;
 
-public class WatLocation implements WatObject {
+public class WatLocation extends WatObject {
     private static final String LOG_TAG = WatLocation.class.getSimpleName();
 
     private List<Data> data;
     private Meta meta;
+
+    public WatLocation() {
+        super(Resource.FOOD_LOCATIONS);
+    }
 
     public List<Data> getData() {
         return this.data;
@@ -57,11 +61,6 @@ public class WatLocation implements WatObject {
 
     public void setMeta(Meta meta) {
         this.meta = meta;
-    }
-
-    @Override
-    public Resource getResourceType() {
-        return Resource.FOOD_LOCATIONS;
     }
 
     public static class Data {

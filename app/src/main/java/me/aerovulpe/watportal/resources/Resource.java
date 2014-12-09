@@ -1,14 +1,14 @@
 package me.aerovulpe.watportal.resources;
 
-import static me.aerovulpe.watportal.constants.Constants.BUILDINGS_RESOURCE;
-import static me.aerovulpe.watportal.constants.Constants.CODES_RESOURCE;
-import static me.aerovulpe.watportal.constants.Constants.COURSES_RESOURCE;
-import static me.aerovulpe.watportal.constants.Constants.EVENTS_RESOURCE;
-import static me.aerovulpe.watportal.constants.Constants.FOOD_RESOURCE;
-import static me.aerovulpe.watportal.constants.Constants.NEWS_RESOURCE;
-import static me.aerovulpe.watportal.constants.Constants.RESOURCES_RESOURCE;
-import static me.aerovulpe.watportal.constants.Constants.TERMS_RESOURCE;
-import static me.aerovulpe.watportal.constants.Constants.WEATHER_RESOURCE;
+import static me.aerovulpe.watportal.Constants.BUILDINGS_RESOURCE;
+import static me.aerovulpe.watportal.Constants.CODES_RESOURCE;
+import static me.aerovulpe.watportal.Constants.COURSES_RESOURCE;
+import static me.aerovulpe.watportal.Constants.EVENTS_RESOURCE;
+import static me.aerovulpe.watportal.Constants.FOOD_RESOURCE;
+import static me.aerovulpe.watportal.Constants.NEWS_RESOURCE;
+import static me.aerovulpe.watportal.Constants.RESOURCES_RESOURCE;
+import static me.aerovulpe.watportal.Constants.TERMS_RESOURCE;
+import static me.aerovulpe.watportal.Constants.WEATHER_RESOURCE;
 
 /**
  * Created by Aaron on 28/11/2014.
