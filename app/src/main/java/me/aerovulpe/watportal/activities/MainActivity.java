@@ -17,6 +17,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import me.aerovulpe.watportal.R;
+import me.aerovulpe.watportal.downloaders.WatDataFetcher;
+import me.aerovulpe.watportal.resources.Resource;
 import me.aerovulpe.watportal.resources.WatObject;
 import me.aerovulpe.watportal.resources.WatObjectHandler;
 
@@ -67,8 +69,10 @@ public class MainActivity extends Activity {
         //testing!
         EditText queries;
         Button submit;
+        WatDataFetcher mWatDataFetcher;
 
         public PlaceholderFragment() {
+            mWatDataFetcher = new WatDataFetcher();
         }
 
         @Override
@@ -100,29 +104,23 @@ public class MainActivity extends Activity {
                     ((TextView) getView().findViewById(R.id.textView)).setText("Check LogCat for data returned.");
 
                     String[] args = params.toArray(new String[params.size()]);
-                    //new GetJSONData(Resource.FOOD_MENU, args).execute(PlaceholderFragment.this);
-                    //new GetJSONData(Resource.FOOD_NOTES, args).execute(PlaceholderFragment.this);
-                    //new GetJSONData(Resource.FOOD_DIETS, args).execute(PlaceholderFragment.this);
-                    //new GetJSONData(Resource.FOOD_OUTLETS, args).execute(PlaceholderFragment.this);
-                    //new GetJSONData(Resource.FOOD_LOCATIONS, args).execute(PlaceholderFragment.this);
-                    //new GetJSONData(Resource.FOOD_WATCARD, args).execute(PlaceholderFragment.this);
-                    //new GetJSONData(Resource.FOOD_ANNOUNCEMENTS, args).execute(PlaceholderFragment.this);
-                    //new GetJSONData(Resource.FOOD_PRODUCTS, args).execute(PlaceholderFragment.this);
+                    mWatDataFetcher.execute(PlaceholderFragment.this, Resource.FOOD_MENU, args);
                 }
             });
         }
 
         @Override
+        public void onDestroy() {
+            super.onDestroy();
+            mWatDataFetcher.killDataDownloader();
+        }
+
+        @Override
         public void onWatObjectReceived(final WatObject watObject) {
             //testing
-            getActivity().runOnUiThread(new Runnable(){
-                @Override
-                public void run() {
-                    Toast.makeText(getActivity(), "WatObject Received", Toast.LENGTH_SHORT).show();
-                    Log.d("TESTING", watObject.toString());
-                    Log.d("TESTING", watObject.getResourceType().name());
-                }
-            });
+            Toast.makeText(getActivity(), "WatObject Received", Toast.LENGTH_SHORT).show();
+            Log.d("TESTING", watObject.toString());
+            Log.d("TESTING", watObject.getResourceType().name());
         }
     }
 }

@@ -18,13 +18,14 @@ enum DownloadStatus {
     IDLE, PROCESSING, NOT_INTIALISED, FAILED_OR_EMPTY, OK
 }
 
-public class GetRawData {
-    private static final String LOG_TAG = GetRawData.class.getSimpleName();
+public class RawDataFetcher {
+    private static final String LOG_TAG = RawDataFetcher.class.getSimpleName();
     private String url;
-    private String data;
+    private Object data;
     protected DownloadStatus downloadStatus;
+    protected RawDataDownloader mDataDownloader;
 
-    public GetRawData() {
+    public RawDataFetcher() {
         downloadStatus = DownloadStatus.IDLE;
     }
 
@@ -38,7 +39,7 @@ public class GetRawData {
         return downloadStatus;
     }
 
-    public String getData() {
+    public Object getData() {
         return data;
     }
 
@@ -50,14 +51,21 @@ public class GetRawData {
         this.url = url;
     }
 
-    protected void execute(RawDataDownloader rawDataDownloader) {
-        rawDataDownloader.execute(url);
+    protected void execute(RawDataDownloader dataDownloader) {
+        mDataDownloader = dataDownloader;
+        dataDownloader.execute(url);
         downloadStatus = DownloadStatus.PROCESSING;
     }
 
-    class RawDataDownloader extends AsyncTask<String, Void, String> {
+    public void killDataDownloader() {
+        if (mDataDownloader != null) {
+            mDataDownloader.cancel(true);
+        }
+    }
+
+    class RawDataDownloader extends AsyncTask<String, Void, Object> {
         @Override
-        protected String doInBackground(String... params) {
+        protected Object doInBackground(String... params) {
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
 
@@ -103,10 +111,9 @@ public class GetRawData {
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(Object result) {
             super.onPostExecute(result);
             data = result;
-            Log.v(LOG_TAG, "Data returned was: " + data);
 
             if (data == null)
                 if (url == null)
