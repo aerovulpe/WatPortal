@@ -25,8 +25,8 @@ public class WatDataFetcher {
     private List<WatDataDownloader> mDataDownloaders;
 
 
+    //Restrict instantiation.
     private WatDataFetcher() {
-        //Restrict instantiation.
         mDataDownloaders = new ArrayList<>();
     }
 
