@@ -36,8 +36,9 @@ public class WatDataDownloader extends AsyncTask<String, Void, WatObject> {
         try {
             return WatObject.parse(mResource, new JSONObject(getJSONString(params[0])));
         } catch (JSONException e) {
-            e.printStackTrace();
             Log.e(LOG_TAG, "Error processing JSON data, watObject is null!", e);
+        } catch (NullPointerException e){
+            Log.e(LOG_TAG, "Empty JSON data string, watObject is null!", e);
         }
 
         return null;
