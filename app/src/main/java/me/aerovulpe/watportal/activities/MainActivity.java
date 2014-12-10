@@ -107,8 +107,22 @@ public class MainActivity extends Activity {
 
                     String[] args = params.toArray(new String[params.size()]);
                     mWatDataFetcher.execute(PlaceholderFragment.this, Resource.FOOD_MENU, args);
-                    mWatDataFetcher.execute(PlaceholderFragment.this, Resource.FOOD_NOTES, args);
-                    mWatDataFetcher.execute(PlaceholderFragment.this, Resource.FOOD_OUTLETS, args);
+                    mWatDataFetcher.execute(new WatObjectHandler() {
+                        @Override
+                        public void onWatObjectReceived(WatObject watObject) {
+                            Toast.makeText(getActivity(), "WatObject Received in Anon #1 listener", Toast.LENGTH_SHORT).show();
+                            Log.d("TESTING", watObject.toString());
+                            Log.d("TESTING", watObject.getResourceType().name());
+                        }
+                    }, Resource.FOOD_NOTES, args);
+                    mWatDataFetcher.execute(new WatObjectHandler() {
+                        @Override
+                        public void onWatObjectReceived(WatObject watObject) {
+                            Toast.makeText(getActivity(), "WatObject Received in Anon #2 listener", Toast.LENGTH_SHORT).show();
+                            Log.d("TESTING", watObject.toString());
+                            Log.d("TESTING", watObject.getResourceType().name());
+                        }
+                    }, Resource.FOOD_OUTLETS, args);
                 }
             });
         }
@@ -122,7 +136,7 @@ public class MainActivity extends Activity {
         @Override
         public void onWatObjectReceived(final WatObject watObject) {
             //testing
-            Toast.makeText(getActivity(), "WatObject Received", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "WatObject Received in PlaceHolderFragment", Toast.LENGTH_SHORT).show();
             Log.d("TESTING", watObject.toString());
             Log.d("TESTING", watObject.getResourceType().name());
         }

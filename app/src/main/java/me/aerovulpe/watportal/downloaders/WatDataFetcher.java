@@ -57,6 +57,7 @@ public class WatDataFetcher {
         for (WatDataDownloader mDataDownloader : mDataDownloaders) {
             mDataDownloader.cancel(true);
         }
+        mDataDownloaders.clear();
     }
 
 }
