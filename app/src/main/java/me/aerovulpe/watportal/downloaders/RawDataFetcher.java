@@ -15,31 +15,20 @@ import java.util.List;
 /**
  * Created by Aaron on 17/11/2014.
  */
-
-enum DownloadStatus {
-    IDLE, PROCESSING, NOT_INTIALISED, FAILED_OR_EMPTY, OK
-}
-
 public class RawDataFetcher {
     private static final String LOG_TAG = RawDataFetcher.class.getSimpleName();
     private String url;
     private Object data;
-    protected DownloadStatus downloadStatus;
     protected List<RawDataDownloader> mDataDownloaders;
 
     public RawDataFetcher() {
-        downloadStatus = DownloadStatus.IDLE;
         mDataDownloaders = new ArrayList<>();
     }
 
     public void reset() {
-        downloadStatus = DownloadStatus.IDLE;
         url = null;
         data = null;
-    }
-
-    public DownloadStatus getDownloadStatus() {
-        return downloadStatus;
+        killDataDownloaders();
     }
 
     public Object getData() {
@@ -57,11 +46,10 @@ public class RawDataFetcher {
     protected void execute(RawDataDownloader dataDownloader) {
         mDataDownloaders.add(dataDownloader);
         dataDownloader.execute(url);
-        downloadStatus = DownloadStatus.PROCESSING;
     }
 
-    public void killDataDownloader() {
-        for (RawDataDownloader mDataDownloader : mDataDownloaders){
+    public void killDataDownloaders() {
+        for (RawDataDownloader mDataDownloader : mDataDownloaders) {
             mDataDownloader.cancel(true);
         }
     }
@@ -117,14 +105,6 @@ public class RawDataFetcher {
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
             data = result;
-
-            if (data == null)
-                if (url == null)
-                    downloadStatus = DownloadStatus.NOT_INTIALISED;
-                else
-                    downloadStatus = DownloadStatus.FAILED_OR_EMPTY;
-            else
-                downloadStatus = DownloadStatus.OK;
         }
     }
 }

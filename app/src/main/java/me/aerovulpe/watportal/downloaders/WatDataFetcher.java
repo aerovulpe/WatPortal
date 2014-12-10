@@ -19,10 +19,20 @@ import static me.aerovulpe.watportal.Constants.BASE_URI;
  * Created by Aaron on 17/11/2014.
  */
 public class WatDataFetcher extends RawDataFetcher {
+    private static final WatDataFetcher INSTANCE = new WatDataFetcher();
+
     private static final String LOG_TAG = WatDataFetcher.class.getSimpleName();
 
     private WatObjectHandler mWatObjectHandler;
 
+
+    private WatDataFetcher() {
+        //Restrict instantiation.
+    }
+
+    public static WatDataFetcher getInstance(){
+        return INSTANCE;
+    }
 
     public void execute(WatObjectHandler watObjectHandler, Resource resource, String... params) {
         mWatObjectHandler = watObjectHandler;
@@ -43,7 +53,7 @@ public class WatDataFetcher extends RawDataFetcher {
     public class WatDataDownloader extends RawDataDownloader {
         private Resource mResource;
 
-        public WatDataDownloader(Resource resource){
+        public WatDataDownloader(Resource resource) {
             mResource = resource;
         }
 

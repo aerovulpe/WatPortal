@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
         WatDataFetcher mWatDataFetcher;
 
         public PlaceholderFragment() {
-            mWatDataFetcher = new WatDataFetcher();
+            mWatDataFetcher = WatDataFetcher.getInstance();
         }
 
         @Override
@@ -114,7 +114,7 @@ public class MainActivity extends Activity {
         @Override
         public void onDestroy() {
             super.onDestroy();
-            mWatDataFetcher.killDataDownloader();
+            mWatDataFetcher.killDataDownloaders();
         }
 
         @Override
