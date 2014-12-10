@@ -30,7 +30,7 @@ public class WatDataFetcher extends RawDataFetcher {
         //Restrict instantiation.
     }
 
-    public static WatDataFetcher getInstance(){
+    public static WatDataFetcher getInstance() {
         return INSTANCE;
     }
 

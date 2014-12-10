@@ -18,21 +18,10 @@ import java.util.List;
 public class RawDataFetcher {
     private static final String LOG_TAG = RawDataFetcher.class.getSimpleName();
     private String url;
-    private Object data;
     protected List<RawDataDownloader> mDataDownloaders;
 
     public RawDataFetcher() {
         mDataDownloaders = new ArrayList<>();
-    }
-
-    public void reset() {
-        url = null;
-        data = null;
-        killDataDownloaders();
-    }
-
-    public Object getData() {
-        return data;
     }
 
     public String getUrl() {
@@ -99,12 +88,6 @@ public class RawDataFetcher {
                         Log.e(LOG_TAG, "Error closing the reader", e);
                     }
             }
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-            data = result;
         }
     }
 }
