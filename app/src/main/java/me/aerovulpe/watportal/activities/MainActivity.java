@@ -3,6 +3,7 @@ package me.aerovulpe.watportal.activities;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,6 +35,7 @@ public class MainActivity extends Activity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+        StrictMode.enableDefaults();
 
     }
 
