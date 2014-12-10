@@ -105,6 +105,8 @@ public class MainActivity extends Activity {
 
                     String[] args = params.toArray(new String[params.size()]);
                     mWatDataFetcher.execute(PlaceholderFragment.this, Resource.FOOD_MENU, args);
+                    mWatDataFetcher.execute(PlaceholderFragment.this, Resource.FOOD_NOTES, args);
+                    mWatDataFetcher.execute(PlaceholderFragment.this, Resource.FOOD_OUTLETS, args);
                 }
             });
         }

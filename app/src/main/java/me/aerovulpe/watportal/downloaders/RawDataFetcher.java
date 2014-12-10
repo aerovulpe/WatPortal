@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Aaron on 17/11/2014.
@@ -23,10 +25,11 @@ public class RawDataFetcher {
     private String url;
     private Object data;
     protected DownloadStatus downloadStatus;
-    protected RawDataDownloader mDataDownloader;
+    protected List<RawDataDownloader> mDataDownloaders;
 
     public RawDataFetcher() {
         downloadStatus = DownloadStatus.IDLE;
+        mDataDownloaders = new ArrayList<>();
     }
 
     public void reset() {
@@ -52,13 +55,13 @@ public class RawDataFetcher {
     }
 
     protected void execute(RawDataDownloader dataDownloader) {
-        mDataDownloader = dataDownloader;
+        mDataDownloaders.add(dataDownloader);
         dataDownloader.execute(url);
         downloadStatus = DownloadStatus.PROCESSING;
     }
 
     public void killDataDownloader() {
-        if (mDataDownloader != null) {
+        for (RawDataDownloader mDataDownloader : mDataDownloaders){
             mDataDownloader.cancel(true);
         }
     }

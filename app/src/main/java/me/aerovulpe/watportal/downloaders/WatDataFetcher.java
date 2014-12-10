@@ -21,15 +21,13 @@ import static me.aerovulpe.watportal.Constants.BASE_URI;
 public class WatDataFetcher extends RawDataFetcher {
     private static final String LOG_TAG = WatDataFetcher.class.getSimpleName();
 
-    private Resource mResource;
     private WatObjectHandler mWatObjectHandler;
 
 
     public void execute(WatObjectHandler watObjectHandler, Resource resource, String... params) {
         mWatObjectHandler = watObjectHandler;
-        mResource = resource;
         setUrl(buildCourseUri(resource, params).toString());
-        execute(new WatDataDownloader());
+        execute(new WatDataDownloader(resource));
         Log.v(LOG_TAG, "Built URI = " + getUrl());
     }
 
@@ -43,6 +41,11 @@ public class WatDataFetcher extends RawDataFetcher {
     }
 
     public class WatDataDownloader extends RawDataDownloader {
+        private Resource mResource;
+
+        public WatDataDownloader(Resource resource){
+            mResource = resource;
+        }
 
         @Override
         protected Object doInBackground(String... params) {
