@@ -15,7 +15,7 @@ import java.net.URL;
 
 import me.aerovulpe.watportal.resources.Resource;
 import me.aerovulpe.watportal.resources.WatObject;
-import me.aerovulpe.watportal.resources.WatObjectHandler;
+import me.aerovulpe.watportal.resources.WatObjectReceiver;
 
 /**
 * Created by Aaron on 10/12/2014.
@@ -23,11 +23,11 @@ import me.aerovulpe.watportal.resources.WatObjectHandler;
 public class WatDataDownloader extends AsyncTask<String, Void, WatObject> {
     private static final String LOG_TAG = WatDataDownloader.class.getSimpleName();
 
-    private WatObjectHandler mWatObjectHandler;
+    private WatObjectReceiver mWatObjectReceiver;
     private Resource mResource;
 
-    public WatDataDownloader(WatObjectHandler watObjectHandler, Resource resource) {
-        mWatObjectHandler = watObjectHandler;
+    public WatDataDownloader(WatObjectReceiver watObjectReceiver, Resource resource) {
+        mWatObjectReceiver = watObjectReceiver;
         mResource = resource;
     }
 
@@ -48,7 +48,7 @@ public class WatDataDownloader extends AsyncTask<String, Void, WatObject> {
     protected void onPostExecute(WatObject result) {
         super.onPostExecute(result);
         if (result != null) {
-            mWatObjectHandler.onWatObjectReceived(result);
+            mWatObjectReceiver.onWatObjectReceived(result);
         }
     }
 

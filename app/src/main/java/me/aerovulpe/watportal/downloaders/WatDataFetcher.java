@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.aerovulpe.watportal.resources.Resource;
-import me.aerovulpe.watportal.resources.WatObjectHandler;
+import me.aerovulpe.watportal.resources.WatObjectReceiver;
 
 import static me.aerovulpe.watportal.Constants.API_KEY;
 import static me.aerovulpe.watportal.Constants.API_KEY_PARAM;
@@ -34,10 +34,10 @@ public class WatDataFetcher {
         return INSTANCE;
     }
 
-    public void execute(WatObjectHandler watObjectHandler, Resource resource, String... params) {
+    public void execute(WatObjectReceiver watObjectReceiver, Resource resource, String... params) {
         String urlStr = buildResourceUri(resource, params).toString();
 
-        WatDataDownloader dataDownloader = new WatDataDownloader(watObjectHandler, resource);
+        WatDataDownloader dataDownloader = new WatDataDownloader(watObjectReceiver, resource);
         dataDownloader.execute(urlStr);
 
         mDataDownloaders.add(dataDownloader);

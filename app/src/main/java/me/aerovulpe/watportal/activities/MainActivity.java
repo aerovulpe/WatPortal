@@ -21,7 +21,7 @@ import me.aerovulpe.watportal.R;
 import me.aerovulpe.watportal.downloaders.WatDataFetcher;
 import me.aerovulpe.watportal.resources.Resource;
 import me.aerovulpe.watportal.resources.WatObject;
-import me.aerovulpe.watportal.resources.WatObjectHandler;
+import me.aerovulpe.watportal.resources.WatObjectReceiver;
 
 
 public class MainActivity extends Activity {
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
     /**
      * A placeholder fragment containing a simple view for testing purposes.
      */
-    public static class PlaceholderFragment extends Fragment implements WatObjectHandler {
+    public static class PlaceholderFragment extends Fragment implements WatObjectReceiver {
 
         //testing!
         EditText queries;
@@ -107,7 +107,7 @@ public class MainActivity extends Activity {
 
                     String[] args = params.toArray(new String[params.size()]);
                     mWatDataFetcher.execute(PlaceholderFragment.this, Resource.FOOD_MENU, args);
-                    mWatDataFetcher.execute(new WatObjectHandler() {
+                    mWatDataFetcher.execute(new WatObjectReceiver() {
                         @Override
                         public void onWatObjectReceived(WatObject watObject) {
                             Toast.makeText(getActivity(), "WatObject Received in Anon #1 listener", Toast.LENGTH_SHORT).show();
@@ -115,7 +115,7 @@ public class MainActivity extends Activity {
                             Log.d("TESTING", watObject.getResourceType().name());
                         }
                     }, Resource.FOOD_NOTES, args);
-                    mWatDataFetcher.execute(new WatObjectHandler() {
+                    mWatDataFetcher.execute(new WatObjectReceiver() {
                         @Override
                         public void onWatObjectReceived(WatObject watObject) {
                             Toast.makeText(getActivity(), "WatObject Received in Anon #2 listener", Toast.LENGTH_SHORT).show();
