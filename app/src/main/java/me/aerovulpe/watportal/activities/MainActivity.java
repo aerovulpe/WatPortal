@@ -1,50 +1,113 @@
 package me.aerovulpe.watportal.activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.util.Log;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import me.aerovulpe.watportal.R;
-import me.aerovulpe.watportal.downloaders.WatDataFetcher;
-import me.aerovulpe.watportal.resources.Resource;
-import me.aerovulpe.watportal.resources.WatObject;
-import me.aerovulpe.watportal.resources.WatObjectReceiver;
+import me.aerovulpe.watportal.downloaders.WatDataDownloader;
+import me.aerovulpe.watportal.fragments.OutletListFragment;
+import me.aerovulpe.watportal.fragments.NavigationDrawerFragment;
+import static me.aerovulpe.watportal.Constants.*;
 
+public class MainActivity extends Activity
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-public class MainActivity extends Activity {
+    /**
+     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
+     */
+    private NavigationDrawerFragment mNavigationDrawerFragment;
+
+    /**
+     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
+     */
+    private CharSequence mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+
+        new WatDataDownloader(this).execute();
+
+        mNavigationDrawerFragment = (NavigationDrawerFragment)
+                getFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mTitle = getTitle();
+
+        // Set up the drawer.
+        mNavigationDrawerFragment.setUp(
+                R.id.navigation_drawer,
+                (DrawerLayout) findViewById(R.id.drawer_layout));
+    }
+
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+        // update the main content by replacing fragments
+        FragmentManager fragmentManager = getFragmentManager();
+        if (position == 0){
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new OutletListFragment())
+                    .commit();
+        }else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                     .commit();
         }
-        StrictMode.enableDefaults();
+    }
 
+    public void onSectionAttached(int number) {
+        switch (number) {
+            case 1:
+                mTitle = getString(R.string.title_section1);
+                break;
+            case 2:
+                mTitle = getString(R.string.title_section2);
+                break;
+            case 3:
+                mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
+                break;
+            case 5:
+                mTitle = getString(R.string.title_section5);
+                break;
+            case 6:
+                mTitle = getString(R.string.title_section6);
+                break;
+            case 7:
+                mTitle = getString(R.string.title_section7);
+                break;
+        }
+    }
+
+    public void restoreActionBar() {
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setTitle(mTitle);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+            // Only show items in the action bar relevant to this screen
+            // if the drawer is not showing. Otherwise, let the drawer
+            // decide what to show in the action bar.
+            getMenuInflater().inflate(R.menu.main, menu);
+            restoreActionBar();
+            return true;
+        }
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -62,19 +125,29 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-
     /**
-     * A placeholder fragment containing a simple view for testing purposes.
+     * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment implements WatObjectReceiver {
+    public static class PlaceholderFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
 
-        //testing!
-        EditText queries;
-        Button submit;
-        WatDataFetcher mWatDataFetcher;
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static PlaceholderFragment newInstance(int sectionNumber) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
 
         public PlaceholderFragment() {
-            mWatDataFetcher = WatDataFetcher.getInstance();
         }
 
         @Override
@@ -85,60 +158,11 @@ public class MainActivity extends Activity {
         }
 
         @Override
-        public void onActivityCreated(Bundle savedInstanceState) {
-            super.onActivityCreated(savedInstanceState);
-            queries = (EditText) getView().findViewById(R.id.editText);
-            submit = (Button) getView().findViewById(R.id.button);
-
-
-            submit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ArrayList<String> params = new ArrayList<String>();
-                    String raw = queries.getText().toString();
-
-                    String[] split = raw.split(" ");
-                    for (String word : split) {
-                        if (word.length() > 0)  // eliminate blank lines
-                            params.add(word);
-                    }
-
-                    ((TextView) getView().findViewById(R.id.textView)).setText("Check LogCat for data returned.");
-
-                    String[] args = params.toArray(new String[params.size()]);
-                    mWatDataFetcher.execute(PlaceholderFragment.this, Resource.FOOD_MENU, args);
-                    mWatDataFetcher.execute(new WatObjectReceiver() {
-                        @Override
-                        public void onWatObjectReceived(WatObject watObject) {
-                            Toast.makeText(getActivity(), "WatObject Received in Anon #1 listener", Toast.LENGTH_SHORT).show();
-                            Log.d("TESTING", watObject.toString());
-                            Log.d("TESTING", watObject.getResourceType().name());
-                        }
-                    }, Resource.FOOD_NOTES, args);
-                    mWatDataFetcher.execute(new WatObjectReceiver() {
-                        @Override
-                        public void onWatObjectReceived(WatObject watObject) {
-                            Toast.makeText(getActivity(), "WatObject Received in Anon #2 listener", Toast.LENGTH_SHORT).show();
-                            Log.d("TESTING", watObject.toString());
-                            Log.d("TESTING", watObject.getResourceType().name());
-                        }
-                    }, Resource.FOOD_OUTLETS, args);
-                }
-            });
-        }
-
-        @Override
-        public void onDestroy() {
-            super.onDestroy();
-            mWatDataFetcher.killDataDownloaders();
-        }
-
-        @Override
-        public void onWatObjectReceived(final WatObject watObject) {
-            //testing
-            Toast.makeText(getActivity(), "WatObject Received in PlaceHolderFragment", Toast.LENGTH_SHORT).show();
-            Log.d("TESTING", watObject.toString());
-            Log.d("TESTING", watObject.getResourceType().name());
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+            ((MainActivity) activity).onSectionAttached(
+                    getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
+
 }

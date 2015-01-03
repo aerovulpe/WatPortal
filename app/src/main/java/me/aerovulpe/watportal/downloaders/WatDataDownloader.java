@@ -1,5 +1,6 @@
 package me.aerovulpe.watportal.downloaders;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -13,43 +14,35 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import me.aerovulpe.watportal.resources.Resource;
-import me.aerovulpe.watportal.resources.WatObject;
-import me.aerovulpe.watportal.resources.WatObjectReceiver;
+import me.aerovulpe.watportal.Utility;
+import me.aerovulpe.watportal.data.Resource;
 
 /**
 * Created by Aaron on 10/12/2014.
 */
-public class WatDataDownloader extends AsyncTask<String, Void, WatObject> {
+public class WatDataDownloader extends AsyncTask<String, Void, Void> {
     private static final String LOG_TAG = WatDataDownloader.class.getSimpleName();
 
-    private WatObjectReceiver mWatObjectReceiver;
-    private Resource mResource;
+    Context mContext;
 
-    public WatDataDownloader(WatObjectReceiver watObjectReceiver, Resource resource) {
-        mWatObjectReceiver = watObjectReceiver;
-        mResource = resource;
+    public WatDataDownloader(Context context){
+        mContext = context;
     }
 
     @Override
-    protected WatObject doInBackground(String... params) {
+    protected Void doInBackground(String... params) {
+
         try {
-            return WatObject.parse(mResource, new JSONObject(getJSONString(params[0])));
+            String json = getJSONString("https://api.uwaterloo.ca/v2/buildings/list.json?key=759f046d712dc42cc5a5b65745d635c3");
+            Log.d(LOG_TAG, json);
+            Utility.parseJSON(mContext, Resource.BUILDINGS_LIST, new JSONObject(json));
         } catch (JSONException e) {
-            Log.e(LOG_TAG, "Error processing JSON data, watObject is null!", e);
+            Log.e(LOG_TAG, "Error processing JSON data!", e);
         } catch (NullPointerException e){
-            Log.e(LOG_TAG, "Empty JSON data string, watObject is null!", e);
+            Log.e(LOG_TAG, "Empty JSON data string!", e);
         }
 
         return null;
-    }
-
-    @Override
-    protected void onPostExecute(WatObject result) {
-        super.onPostExecute(result);
-        if (result != null) {
-            mWatObjectReceiver.onWatObjectReceived(result);
-        }
     }
 
     private String getJSONString(String urlStr){

@@ -4,5 +4,15 @@
     <string name="app_name">WatPortal</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_section1">Food Services</string>
+    <string name="title_section2">Courses</string>
+    <string name="title_section3">Events</string>
+    <string name="title_section4">News</string>
+    <string name="title_section5">Weather</string>
+    <string name="title_section6">Buildings</string>
+    <string name="title_section7">Resources</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 </resources>

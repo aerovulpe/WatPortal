@@ -18,6 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:authorities="me.aerovulpe.watportal"
+            android:name=".data.ResourceProvider"/>
     </application>
 
 </manifest>
