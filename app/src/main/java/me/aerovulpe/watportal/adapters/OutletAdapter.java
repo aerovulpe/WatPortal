@@ -38,8 +38,10 @@ public class OutletAdapter extends CursorAdapter {
         final ViewHolder holder = (ViewHolder) view.getTag();
 
         String name = cursor.getString(OutletListFragment.COL_OUTLET_NAME);
-        String building = Utility.getBuildingNameFromCode(context,
-                cursor.getString(OutletListFragment.COL_BUILDING));
+        int limit = name.indexOf(" - ");
+        name = name.substring(0, (limit > 0 ? limit:name.length()));
+        String building = (Utility.getBuildingNameFromCode(context,
+                cursor.getString(OutletListFragment.COL_BUILDING)));
         String logoSrc = cursor.getString(OutletListFragment.COL_LOGO);
         int isOpen = cursor.getInt(OutletListFragment.COL_IS_OPEN_NOW);
 

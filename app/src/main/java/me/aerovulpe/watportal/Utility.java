@@ -426,8 +426,7 @@ public class Utility {
                     values.put(BuildingsEntry.COLUMN_BUILDING_CODE, dataObject.getString(BUILDING_CODE_KEY));
                     values.put(BuildingsEntry.COLUMN_BUILDING_NAME, dataObject.getString(BUILDING_NAME_KEY));
                     values.put(BuildingsEntry.COLUMN_ALTERNATE_NAMES, dataObject.optJSONArray(ALTERNATE_NAMES_KEY)
-                            .toString()
-                            .getBytes());
+                            .toString());
                     values.put(BuildingsEntry.COLUMN_LATITUDE, dataObject.optDouble(LATITUDE_KEY));
                     values.put(BuildingsEntry.COLUMN_LONGITUDE, dataObject.optDouble(LONGITUDE_KEY));
                     values.put(BuildingsEntry.COLUMN_BUILDING_SECTIONS, dataObject.optJSONArray(BUILDING_SECTIONS_KEY)
@@ -447,9 +446,11 @@ public class Utility {
     public static String getBuildingNameFromCode(Context context, String code) {
         Cursor cursor = context.getContentResolver().query(BuildingsEntry.CONTENT_URI,
                 new String[]{BuildingsEntry.COLUMN_BUILDING_NAME},
-               BuildingsEntry.COLUMN_BUILDING_CODE + " = " + "'" + code + "'", null, null);
-        if (cursor.moveToFirst()) return cursor.getString(0);
-        else return null;
+               BuildingsEntry.COLUMN_BUILDING_CODE + " = " + "'" + code + "'"  + " OR " +
+                       BuildingsEntry.COLUMN_ALTERNATE_NAMES + " LIKE " + "'%" + code + "%'", null, null);
+        String buildingName = cursor.moveToFirst()? cursor.getString(0):code;
+        cursor.close();
+        return buildingName;
     }
 
     public Uri buildResourceUri(Resource resource, String... params) {

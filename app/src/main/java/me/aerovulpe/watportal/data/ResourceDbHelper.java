@@ -183,7 +183,7 @@ public class ResourceDbHelper extends SQLiteOpenHelper {
                 BuildingsEntry.COLUMN_BUILDING_ID + " TEXT, " +
                 BuildingsEntry.COLUMN_BUILDING_CODE + " TEXT, " +
                 BuildingsEntry.COLUMN_BUILDING_NAME + " TEXT, " +
-                BuildingsEntry.COLUMN_ALTERNATE_NAMES + " BLOB, " +
+                BuildingsEntry.COLUMN_ALTERNATE_NAMES + " TEXT, " +
                 BuildingsEntry.COLUMN_LATITUDE + " REAL, " +
                 BuildingsEntry.COLUMN_LONGITUDE + " REAL, " +
                 BuildingsEntry.COLUMN_BUILDING_SECTIONS + " BLOB, " +
