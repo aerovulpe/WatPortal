@@ -33,9 +33,11 @@ public class WatDataDownloader extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... params) {
 
         try {
-            String json = getJSONString("https://api.uwaterloo.ca/v2/foodservices/locations.json?key=759f046d712dc42cc5a5b65745d635c3");
-            Log.d(LOG_TAG, json);
-            Utility.parseJSON(mContext, Resource.FOOD_LOCATIONS, new JSONObject(json));
+            String locationStr = getJSONString("https://api.uwaterloo.ca/v2/foodservices/locations.json?key=759f046d712dc42cc5a5b65745d635c3");
+            String buildingStr = getJSONString("https://api.uwaterloo.ca/v2/buildings/list.json?key=759f046d712dc42cc5a5b65745d635c3");
+            Log.d(LOG_TAG, locationStr);
+            Utility.parseJSON(mContext, Resource.FOOD_LOCATIONS, new JSONObject(locationStr));
+            Utility.parseJSON(mContext, Resource.BUILDINGS_LIST, new JSONObject(buildingStr));
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Error processing JSON data!", e);
         } catch (NullPointerException e){

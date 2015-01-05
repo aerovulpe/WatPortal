@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 import me.aerovulpe.watportal.data.tables.buildings.BuildingsEntry;
@@ -31,7 +32,7 @@ public class ResourceProvider extends ContentProvider {
     private static final int DIETS = 110;
     private static final int LOCATIONS = 120;
     private static final int LOCATION_OPENING_HOURS = 121;
-    private static final int LOCATION_SPECIAL_HOURS = 122;
+    private static final int LOCATIONS_WITH_HOURS = 123;
     private static final int MENUS = 130;
     private static final int NOTES = 140;
     private static final int OUTLETS = 150;
@@ -39,23 +40,18 @@ public class ResourceProvider extends ContentProvider {
     private static final int WATCARD = 170;
     private static final int BUILDINGS = 600;
 
-//    private static final SQLiteQueryBuilder sLocationQueryBuilder;
-//
-//    static {
-//        sLocationQueryBuilder = new SQLiteQueryBuilder();
-//        sLocationQueryBuilder.setTables(
-//                LocationsEntry.TABLE_NAME + " INNER JOIN " +
-//                        LocationsEntry.OpeningHoursEntry.TABLE_NAME +
-//                        " ON " + LocationsEntry.TABLE_NAME +
-//                        "." + LocationsEntry._ID +
-//                        " = " + LocationsEntry.OpeningHoursEntry.TABLE_NAME +
-//                        "." + LocationsEntry.OpeningHoursEntry.COLUMN_LOC_KEY + " INNER JOIN " +
-//                        LocationsEntry.SpecialHoursEntry.TABLE_NAME +
-//                        " ON " + LocationsEntry.TABLE_NAME +
-//                        "." + LocationsEntry._ID +
-//                        " = " + LocationsEntry.SpecialHoursEntry.TABLE_NAME +
-//                        "." + LocationsEntry.SpecialHoursEntry.COLUMN_LOC_KEY);
-//    }
+    private static final SQLiteQueryBuilder sLocationWithHoursQueryBuilder;
+
+    static {
+        sLocationWithHoursQueryBuilder = new SQLiteQueryBuilder();
+        sLocationWithHoursQueryBuilder.setTables(
+                LocationsEntry.TABLE_NAME + " JOIN " +
+                        LocationsEntry.OpeningHoursEntry.TABLE_NAME +
+                        " ON " + LocationsEntry.TABLE_NAME +
+                        "." + LocationsEntry._ID +
+                        " = " + LocationsEntry.OpeningHoursEntry.TABLE_NAME +
+                        "." + LocationsEntry.OpeningHoursEntry.COLUMN_LOC_KEY);
+    }
 
     private static UriMatcher buildUriMatcher() {
         // I know what you're thinking.  Why create a UriMatcher when you can use regular
@@ -72,7 +68,7 @@ public class ResourceProvider extends ContentProvider {
         matcher.addURI(authority, ResourceContract.PATH_DIETS, DIETS);
         matcher.addURI(authority, ResourceContract.PATH_LOCATIONS, LOCATIONS);
         matcher.addURI(authority, ResourceContract.PATH_LOCATIONS_OPENING_HOURS, LOCATION_OPENING_HOURS);
-        matcher.addURI(authority, ResourceContract.PATH_LOCATIONS_SPECIAL_HOURS, LOCATION_SPECIAL_HOURS);
+        matcher.addURI(authority, ResourceContract.PATH_LOCATIONS_WITH_HOURS, LOCATIONS_WITH_HOURS);
         matcher.addURI(authority, ResourceContract.PATH_MENU, MENUS);
         matcher.addURI(authority, ResourceContract.PATH_NOTES, NOTES);
         matcher.addURI(authority, ResourceContract.PATH_OUTLETS, OUTLETS);
@@ -127,26 +123,15 @@ public class ResourceProvider extends ContentProvider {
                         sortOrder);
                 break;
 
-            case LOCATION_OPENING_HOURS:
-                cursor = mOpenHelper.getReadableDatabase().query(
-                        LocationsEntry.OpeningHoursEntry.TABLE_NAME,
+            case LOCATIONS_WITH_HOURS:
+                cursor = sLocationWithHoursQueryBuilder.query(mOpenHelper.getReadableDatabase(),
                         projection,
                         selection,
                         selectionArgs,
                         null,
                         null,
-                        sortOrder);
-                break;
-
-            case LOCATION_SPECIAL_HOURS:
-                cursor = mOpenHelper.getReadableDatabase().query(
-                        LocationsEntry.SpecialHoursEntry.TABLE_NAME,
-                        projection,
-                        selection,
-                        selectionArgs,
-                        null,
-                        null,
-                        sortOrder);
+                        sortOrder
+                );
                 break;
 
             case MENUS:
@@ -234,8 +219,6 @@ public class ResourceProvider extends ContentProvider {
                 return LocationsEntry.CONTENT_TYPE;
             case LOCATION_OPENING_HOURS:
                 return LocationsEntry.OpeningHoursEntry.CONTENT_TYPE;
-            case LOCATION_SPECIAL_HOURS:
-                return LocationsEntry.SpecialHoursEntry.CONTENT_TYPE;
             case MENUS:
                 return MenuEntry.CONTENT_TYPE;
             case NOTES:
@@ -288,14 +271,6 @@ public class ResourceProvider extends ContentProvider {
                 long _id = db.insert(LocationsEntry.OpeningHoursEntry.TABLE_NAME, null, values);
                 if (_id > 0)
                     returnUri = LocationsEntry.OpeningHoursEntry.buildOpeningHoursUri(_id);
-                else
-                    throw new android.database.SQLException("Failed to insert row into " + uri);
-                break;
-            }
-            case LOCATION_SPECIAL_HOURS: {
-                long _id = db.insert(LocationsEntry.SpecialHoursEntry.TABLE_NAME, null, values);
-                if (_id > 0)
-                    returnUri = LocationsEntry.SpecialHoursEntry.buildSpecialHoursUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
@@ -373,8 +348,6 @@ public class ResourceProvider extends ContentProvider {
                         LocationsEntry.TABLE_NAME, selection, selectionArgs);
                 db.delete(LocationsEntry.OpeningHoursEntry.TABLE_NAME, ContentUris.parseId(uri) +
                         " = " + LocationsEntry.OpeningHoursEntry.COLUMN_LOC_KEY, null);
-                db.delete(LocationsEntry.SpecialHoursEntry.TABLE_NAME, ContentUris.parseId(uri) +
-                        " = " + LocationsEntry.SpecialHoursEntry.COLUMN_LOC_KEY, null);
                 break;
             case MENUS:
                 rowsDeleted = db.delete(
@@ -431,10 +404,6 @@ public class ResourceProvider extends ContentProvider {
             case LOCATION_OPENING_HOURS:
                 rowsUpgraded = db.update(
                         LocationsEntry.OpeningHoursEntry.TABLE_NAME, values, selection, selectionArgs);
-                break;
-            case LOCATION_SPECIAL_HOURS:
-                rowsUpgraded = db.update(
-                        LocationsEntry.SpecialHoursEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case MENUS:
                 rowsUpgraded = db.update(
@@ -530,23 +499,6 @@ public class ResourceProvider extends ContentProvider {
                 try {
                     for (ContentValues value : values) {
                         long _id = db.insert(LocationsEntry.OpeningHoursEntry.TABLE_NAME, null, value);
-                        if (_id != -1) {
-                            returnCount++;
-                        }
-                    }
-                    db.setTransactionSuccessful();
-                } finally {
-                    db.endTransaction();
-                }
-                getContext().getContentResolver().notifyChange(uri, null);
-                return returnCount;
-            }
-            case LOCATION_SPECIAL_HOURS: {
-                db.beginTransaction();
-                int returnCount = 0;
-                try {
-                    for (ContentValues value : values) {
-                        long _id = db.insert(LocationsEntry.SpecialHoursEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }

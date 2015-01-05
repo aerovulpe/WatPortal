@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
@@ -14,12 +15,14 @@ import android.view.ViewGroup;
 
 import me.aerovulpe.watportal.R;
 import me.aerovulpe.watportal.downloaders.WatDataDownloader;
-import me.aerovulpe.watportal.fragments.OutletListFragment;
+import me.aerovulpe.watportal.fragments.MenuFragment;
 import me.aerovulpe.watportal.fragments.NavigationDrawerFragment;
-import static me.aerovulpe.watportal.Constants.*;
+import me.aerovulpe.watportal.fragments.OutletListFragment;
+
+import static me.aerovulpe.watportal.Constants.ARG_SECTION_NUMBER;
 
 public class MainActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, OutletListFragment.OnOutletSelectedListener, MenuFragment.OnFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -52,38 +55,38 @@ public class MainActivity extends Activity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
-        if (position == 0){
+        if (position == 0) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, new OutletListFragment())
+                    .replace(R.id.container, OutletListFragment.newInstance(position))
                     .commit();
-        }else {
+        } else {
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                    .replace(R.id.container, PlaceholderFragment.newInstance(position))
                     .commit();
         }
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
-            case 1:
+            case 0:
                 mTitle = getString(R.string.title_section1);
                 break;
-            case 2:
+            case 1:
                 mTitle = getString(R.string.title_section2);
                 break;
-            case 3:
+            case 2:
                 mTitle = getString(R.string.title_section3);
                 break;
-            case 4:
+            case 3:
                 mTitle = getString(R.string.title_section4);
                 break;
-            case 5:
+            case 4:
                 mTitle = getString(R.string.title_section5);
                 break;
-            case 6:
+            case 5:
                 mTitle = getString(R.string.title_section6);
                 break;
-            case 7:
+            case 6:
                 mTitle = getString(R.string.title_section7);
                 break;
         }
@@ -123,6 +126,20 @@ public class MainActivity extends Activity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onOutletSelected(String outletName) {
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, MenuFragment.newInstance(outletName))
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
     /**

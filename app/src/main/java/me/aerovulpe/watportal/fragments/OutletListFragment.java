@@ -1,5 +1,6 @@
 package me.aerovulpe.watportal.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.ContentResolver;
@@ -10,9 +11,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import me.aerovulpe.watportal.R;
+import me.aerovulpe.watportal.activities.MainActivity;
 import me.aerovulpe.watportal.adapters.OutletAdapter;
 import me.aerovulpe.watportal.data.tables.buildings.BuildingsEntry;
 import me.aerovulpe.watportal.data.tables.food.LocationsEntry;
@@ -67,6 +70,17 @@ public class OutletListFragment extends Fragment implements LoaderManager.Loader
 //                new int[]{android.R.id.text1, android.R.id.text2},
 //                0));
         mListView.setAdapter(mOutletAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                OutletAdapter adapter = (OutletAdapter) parent.getAdapter();
+                Cursor cursor = adapter.getCursor();
+                if (cursor != null && cursor.moveToPosition(position)) {
+                    String outletName = cursor.getString(cursor.getColumnIndex(LocationsEntry.COLUMN_OUTLET_NAME));
+                    ((OnOutletSelectedListener) getActivity()).onOutletSelected(outletName);
+                }
+            }
+        });
 
         return rootView;
     }
@@ -75,6 +89,13 @@ public class OutletListFragment extends Fragment implements LoaderManager.Loader
     public void onActivityCreated(Bundle savedInstanceState) {
         getLoaderManager().initLoader(OUTLETS_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((MainActivity) activity).onSectionAttached(
+                getArguments().getInt(ARG_SECTION_NUMBER));
     }
 
     @Override
@@ -109,5 +130,9 @@ public class OutletListFragment extends Fragment implements LoaderManager.Loader
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mOutletAdapter.swapCursor(null);
+    }
+
+    public interface OnOutletSelectedListener {
+        public void onOutletSelected(String outletName);
     }
 }

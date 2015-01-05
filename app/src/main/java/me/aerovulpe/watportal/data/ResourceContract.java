@@ -33,6 +33,7 @@ public class ResourceContract {
     public static final String PATH_LOCATIONS = "locations";
     public static final String PATH_LOCATIONS_OPENING_HOURS = "opening_hours";
     public static final String PATH_LOCATIONS_SPECIAL_HOURS = "special_hours";
+    public static final String PATH_LOCATIONS_WITH_HOURS = "locations_with_hours";
     public static final String PATH_MENU = "menu";
     public static final String PATH_NOTES = "notes";
     public static final String PATH_OUTLETS = "outlets";

@@ -1,75 +1,126 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp"
-                tools:context="me.aerovulpe.watportal.fragments.MenuFragment">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tim Hortons"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/text_outlet_name"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/text_location"
-        android:layout_alignEnd="@+id/text_location"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Student Life Centre"
-        android:id="@+id/text_location"
-        android:layout_marginTop="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/image_outlet_logo"
-        android:layout_toEndOf="@+id/image_outlet_logo"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Monday, January 5 "
-        android:id="@+id/text_date"
-        android:layout_below="@+id/text_location"
-        android:layout_toRightOf="@+id/image_outlet_logo"
-        android:layout_toEndOf="@+id/image_outlet_logo"/>
-
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:foregroundGravity="center"
-        android:layout_below="@+id/image_outlet_logo">
-
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Breakfast"
-        android:id="@+id/text_breakfast_header"
-        android:layout_alignParentBottom="true"/>
-</RelativeLayout>
-    </ScrollView>
+        android:padding="16dp"
+        tools:context="me.aerovulpe.watportal.fragments.MenuFragment">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/image_outlet_logo"
-        android:src="@drawable/placeholder"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginRight="5dp"
-        />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/image_outlet_logo"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/text_outlet_name"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/image_outlet_logo"
+            android:layout_toEndOf="@+id/image_outlet_logo"/>
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/text_building"
+            android:layout_below="@id/text_outlet_name"
+            android:layout_toRightOf="@+id/image_outlet_logo"
+            android:layout_toEndOf="@+id/image_outlet_logo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/text_date"
+            android:layout_below="@+id/text_building"
+            android:layout_toRightOf="@+id/image_outlet_logo"
+            android:layout_toEndOf="@+id/image_outlet_logo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/text_is_open"
+            android:layout_marginBottom="30dp"
+            android:layout_below="@+id/text_date"
+            android:layout_toRightOf="@+id/image_outlet_logo"
+            android:layout_toEndOf="@+id/image_outlet_logo"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_lunch_menu"
+            android:layout_below="@+id/text_notice"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Lunch Menu"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_dinner_menu"
+            android:layout_below="@+id/button_lunch_menu"
+            android:text="Dinner Menu"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_show_on_map"
+            android:layout_alignBottom="@+id/text_closing_hours"
+            android:layout_alignRight="@+id/button_dinner_menu"
+            android:layout_alignEnd="@+id/button_dinner_menu"
+            android:text="Show On Map"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/text_description"
+            android:visibility="gone"
+            android:layout_below="@+id/text_is_open"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/text_notice"
+            android:maxLines="10"
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/text_description"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/text_opening_hours"
+            android:layout_below="@+id/button_dinner_menu"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="28dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/text_closing_hours"
+            android:layout_below="@+id/text_opening_hours"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+    </RelativeLayout>
+</ScrollView>

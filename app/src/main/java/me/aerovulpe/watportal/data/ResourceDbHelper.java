@@ -79,19 +79,6 @@ public class ResourceDbHelper extends SQLiteOpenHelper {
 
                 " UNIQUE (" + LocationsEntry.OpeningHoursEntry.COLUMN_DAY_OF_THE_WEEK + ", " +
                 LocationsEntry.OpeningHoursEntry.COLUMN_LOC_KEY + ") ON CONFLICT REPLACE);";
-        final String SQL_CREATE_SPECIAL_HOURS_TABLE = "CREATE TABLE " + LocationsEntry.SpecialHoursEntry.TABLE_NAME + " (" +
-                LocationsEntry.SpecialHoursEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-
-                LocationsEntry.SpecialHoursEntry.COLUMN_DATE + " TEXT, " +
-                LocationsEntry.SpecialHoursEntry.COLUMN_OPENING_HOUR + " TEXT, " +
-                LocationsEntry.SpecialHoursEntry.COLUMN_CLOSING_HOUR + " TEXT, " +
-                LocationsEntry.SpecialHoursEntry.COLUMN_LOC_KEY + " INTEGER, " +
-
-                " FOREIGN KEY (" + LocationsEntry.SpecialHoursEntry.COLUMN_LOC_KEY + ") REFERENCES " +
-                LocationsEntry.TABLE_NAME + " (" + LocationsEntry._ID + "), " +
-
-                " UNIQUE (" + LocationsEntry.SpecialHoursEntry.COLUMN_DATE + ", " +
-                LocationsEntry.SpecialHoursEntry.COLUMN_LOC_KEY + ") ON CONFLICT REPLACE);";
 
         final String SQL_CREATE_MENU_TABLE = "CREATE TABLE " + MenuEntry.TABLE_NAME + " (" +
                 MenuEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -194,7 +181,6 @@ public class ResourceDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_DIETS_TABLE);
         db.execSQL(SQL_CREATE_LOCATIONS_TABLE);
         db.execSQL(SQL_CREATE_OPENING_HOURS_TABLE);
-        db.execSQL(SQL_CREATE_SPECIAL_HOURS_TABLE);
         db.execSQL(SQL_CREATE_MENU_TABLE);
         db.execSQL(SQL_CREATE_NOTES_TABLE);
         db.execSQL(SQL_CREATE_OUTLETS_TABLE);
@@ -209,7 +195,6 @@ public class ResourceDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DietsEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + LocationsEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + LocationsEntry.OpeningHoursEntry.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + LocationsEntry.SpecialHoursEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + MenuEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + NotesEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + OutletsEntry.TABLE_NAME);

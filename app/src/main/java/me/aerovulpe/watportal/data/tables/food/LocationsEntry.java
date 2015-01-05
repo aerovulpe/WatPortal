@@ -8,7 +8,7 @@ import static me.aerovulpe.watportal.data.ResourceContract.BASE_CONTENT_URI;
 import static me.aerovulpe.watportal.data.ResourceContract.CONTENT_AUTHORITY;
 import static me.aerovulpe.watportal.data.ResourceContract.PATH_LOCATIONS;
 import static me.aerovulpe.watportal.data.ResourceContract.PATH_LOCATIONS_OPENING_HOURS;
-import static me.aerovulpe.watportal.data.ResourceContract.PATH_LOCATIONS_SPECIAL_HOURS;
+import static me.aerovulpe.watportal.data.ResourceContract.PATH_LOCATIONS_WITH_HOURS;
 
 /**
  * Created by Aaron on 30/12/2014.
@@ -30,6 +30,9 @@ public class LocationsEntry implements BaseColumns {
 
     public static final Uri CONTENT_URI =
             BASE_CONTENT_URI.buildUpon().appendPath(PATH_LOCATIONS).build();
+
+    public static final Uri CONTENT_WITH_HOURS_URI =
+            BASE_CONTENT_URI.buildUpon().appendPath(PATH_LOCATIONS_WITH_HOURS).build();
 
     public static final String CONTENT_TYPE =
             "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + PATH_LOCATIONS;
@@ -59,27 +62,6 @@ public class LocationsEntry implements BaseColumns {
                 "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + PATH_LOCATIONS_OPENING_HOURS;
 
         public static Uri buildOpeningHoursUri(long id) {
-            return ContentUris.withAppendedId(CONTENT_URI, id);
-        }
-    }
-
-    public static class SpecialHoursEntry implements BaseColumns{
-        public static final String TABLE_NAME = "special_hours";
-
-        public static final String COLUMN_DATE = "date";
-        public static final String COLUMN_OPENING_HOUR = "opening_hour";
-        public static final String COLUMN_CLOSING_HOUR = "closing_hour";
-        public static final String COLUMN_LOC_KEY = "location_id";
-
-        public static final Uri CONTENT_URI =
-                BASE_CONTENT_URI.buildUpon().appendPath(PATH_LOCATIONS_SPECIAL_HOURS).build();
-
-        public static final String CONTENT_TYPE =
-                "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + PATH_LOCATIONS_SPECIAL_HOURS;
-        public static final String CONTENT_ITEM_TYPE =
-                "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + PATH_LOCATIONS_SPECIAL_HOURS;
-
-        public static Uri buildSpecialHoursUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }

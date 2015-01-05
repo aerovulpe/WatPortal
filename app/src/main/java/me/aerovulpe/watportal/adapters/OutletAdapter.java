@@ -51,7 +51,7 @@ public class OutletAdapter extends CursorAdapter {
                 .error(R.drawable.placeholder)
                 .placeholder(R.drawable.placeholder)
                 .into(holder.iconView);
-        holder.isOpenView.setText((isOpen == 1)? "is open" : "is closed");
+        holder.isOpenView.setText((isOpen == 1)? "Is open" : "Is closed");
 
     }
 

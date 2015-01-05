@@ -5,11 +5,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.text.Html;
+import android.view.View;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 import me.aerovulpe.watportal.data.Resource;
@@ -266,18 +272,6 @@ public class Utility {
                             .insert(LocationsEntry.CONTENT_URI, values));
                     values.clear();
 
-                    JSONArray specialHoursArray = dataObject.getJSONArray(SPECIAL_HOURS_KEY);
-                    for (int j = 0; j < specialHoursArray.length(); j++) {
-                        JSONObject specialHoursObject = specialHoursArray.getJSONObject(j);
-
-                        values.put(LocationsEntry.SpecialHoursEntry.COLUMN_DATE, specialHoursObject.getString(DATE_KEY));
-                        values.put(LocationsEntry.SpecialHoursEntry.COLUMN_OPENING_HOUR, specialHoursObject.getString(OPENING_HOUR_KEY));
-                        values.put(LocationsEntry.SpecialHoursEntry.COLUMN_CLOSING_HOUR, specialHoursObject.getString(CLOSING_HOUR_KEY));
-                        values.put(LocationsEntry.SpecialHoursEntry.COLUMN_LOC_KEY, locationId);
-                        context.getContentResolver().insert(LocationsEntry.SpecialHoursEntry.CONTENT_URI, values);
-                        values.clear();
-                    }
-
                     JSONObject openingHoursObject = dataObject.getJSONObject(OPENING_HOURS_KEY);
 
                     JSONObject sundayObject = openingHoursObject.getJSONObject(SUNDAY_KEY);
@@ -446,14 +440,14 @@ public class Utility {
     public static String getBuildingNameFromCode(Context context, String code) {
         Cursor cursor = context.getContentResolver().query(BuildingsEntry.CONTENT_URI,
                 new String[]{BuildingsEntry.COLUMN_BUILDING_NAME},
-               BuildingsEntry.COLUMN_BUILDING_CODE + " = " + "'" + code + "'"  + " OR " +
-                       BuildingsEntry.COLUMN_ALTERNATE_NAMES + " LIKE " + "'%" + code + "%'", null, null);
-        String buildingName = cursor.moveToFirst()? cursor.getString(0):code;
+                BuildingsEntry.COLUMN_BUILDING_CODE + " = " + "'" + code + "'" + " OR " +
+                        BuildingsEntry.COLUMN_ALTERNATE_NAMES + " LIKE " + "'%" + code + "%'", null, null);
+        String buildingName = cursor.moveToFirst() ? cursor.getString(0) : code;
         cursor.close();
         return buildingName;
     }
 
-    public Uri buildResourceUri(Resource resource, String... params) {
+    public static Uri buildResourceUri(Resource resource, String... params) {
         Uri.Builder uriBuilder = Uri.parse(BASE_URI).buildUpon();
         uriBuilder.appendQueryParameter(API_KEY_PARAM, API_KEY);
 
@@ -462,5 +456,24 @@ public class Utility {
 
 
         return uriBuilder.build();
+    }
+
+    public static void setViewText(TextView textView, String text) {
+        if (text != null && !text.equals("null")) {
+            textView.setText(Html.fromHtml(text));
+            textView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public static String getFormattedTime(String time) {
+        try {
+            SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+            Date _24HourDt = _24HourSDF.parse(time);
+            return _12HourSDF.format(_24HourDt);
+        } catch (final ParseException e) {
+            e.printStackTrace();
+            return time;
+        }
     }
 }
